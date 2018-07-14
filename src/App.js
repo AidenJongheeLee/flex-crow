@@ -13,8 +13,8 @@ import './App.css';
 const muiTheme = createMuiTheme({
   typography: {
     fontFamily: "'Nunito Sans', sans-serif",
-    fontWeight: 300
-  }
+    fontWeight: 300,
+  },
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
