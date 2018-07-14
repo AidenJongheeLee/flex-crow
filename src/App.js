@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import ReduxThunk from 'redux-thunk';
+import { DrizzleProvider } from 'drizzle-react'
 import reducers from './reducers';
 
 import Home from './containers/Home';
