@@ -5,24 +5,32 @@ import AddBox from '@material-ui/icons/AddBox';
 import Settings from '@material-ui/icons/Settings';
 import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { changeTab } from '../actions';
 
 class Sidebar extends Component {
+  handleClick = (tabNumber) => {
+    this.props.changeTab(tabNumber);
+  }
+
   render() {
     return (
       <SidebarContainer className="side-nav">
         <TopIconContainer>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => this.handleClick(1)}>
             <LogoIcon src={require('../images/flexride-logo-320.png')} alt="logo" />
           </IconButton>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => this.handleClick(2)}>
             <AddBox />
           </IconButton>
         </TopIconContainer>
         <BottomIcon>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => this.handleClick(3)}>
             <Settings />
           </IconButton>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => this.handleClick(4)}>
             <PowerSettingsNew />
           </IconButton>
         </BottomIcon>
@@ -62,4 +70,8 @@ const SidebarContainer = styled.div`
   align-items: center;
 `;
 
-export default Sidebar;
+Sidebar.propTypes = {
+  changeTab: PropTypes.func.isRequired,
+};
+
+export default connect(null, { changeTab })(Sidebar);
