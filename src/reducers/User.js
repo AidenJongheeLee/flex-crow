@@ -1,7 +1,7 @@
 import { CHANGE_NAME } from '../actions/types';
 
 const initialState = {
-  name: 'Aiden'
+  name: 'Aiden',
 };
 
 export default (state = initialState, action) => {
