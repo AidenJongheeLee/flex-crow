@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
+import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
 import { changeName } from '../actions';
 
 class Home extends Component {
+  static propTypes = {
+    name: string.isRequired,
+    changeName: func.isRequired,
+  };
+
+  handleClick = () => {
+    const { name } = this.props;
+    console.log(name);
+  };
+
   render() {
+    const { changeName, name } = this.props;
     console.log(this.props);
     return (
       <div>
-        <button
+        <Button
           onClick={() => {
-            this.props.changeName('Jonny');
-          }}>
-          {this.props.name}
-        </button>
+            changeName('Jonny');
+          }}
+        >
+          {name}
+        </Button>
         SuccessFully Rendered Home
       </div>
     );
   }
 }
 
-const mapStatetoProps = state => {
-  return {
-    name: state.user.name
-  };
-};
+const mapStatetoProps = state => ({
+  name: state.user.name,
+});
 
 export default connect(
   mapStatetoProps,
-  { changeName }
+  { changeName },
 )(Home);

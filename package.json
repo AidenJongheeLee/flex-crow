@@ -5,7 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^1.4.0",
     "@material-ui/icons": "^1.1.0",
+<<<<<<< HEAD
     "drizzle-react": "^1.1.1",
+=======
+    "babel-eslint": "^8.2.6",
+    "prop-types": "^15.6.2",
+>>>>>>> 26460c460ec60403f1261288077a037767713902
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
@@ -20,12 +25,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "prettier": {
-    "singleQuote": true,
-    "printWidth": 100,
-    "jsxBracketSameLine": true
-  },
   "devDependencies": {
-    "prettier": "1.13.7"
+    "eslint-config-airbnb": "17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1"
   }
 }
