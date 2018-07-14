@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 import { changeName } from '../actions';
 import Dashboard from './Dashboard';
 import Sidebar from './Sidebar';
+import CreateInvoice from './CreateInovice';
 
 class Home extends Component {
   static propTypes = {
@@ -26,6 +27,7 @@ class Home extends Component {
           {name}
         </Button>
         <Dashboard />
+        <CreateInvoice />
         SuccessFully Rendered Home
       </MainContainer>
     );
