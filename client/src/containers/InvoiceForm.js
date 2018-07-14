@@ -24,57 +24,63 @@ class InvoiceForm extends Component {
     return (
       <div>
         <h2>Create New Invoice</h2>
-        <InvoiceText>This invoice is billed to...</InvoiceText>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-error">New Client</InputLabel>
-          <Select
-            value={invoice.clientSelect}
-            onChange={(e) => {
-              this.handleChangeField(e, 'clientSelect');
-            }}
-          >
-            <MenuItem value={'Aiden'}>Aiden</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          className={classes.TextField}
-          name="name"
-          label="Name"
-          onChange={(e) => {
-            this.handleChangeField(e, 'name');
-          }}
-          value={invoice.name}
-        />
-        <TextField
-          className={classes.TextField}
-          name="email"
-          label="Email"
-          onChange={(e) => {
-            this.handleChangeField(e, 'email');
-          }}
-          value={invoice.email}
-        />
+        <FormContainer>
+          <FormWrapper>
+            <InvoiceText>This invoice is billed to...</InvoiceText>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="name-error">New Client</InputLabel>
+              <Select
+                fullWidth
+                value={invoice.clientSelect}
+                onChange={(e) => {
+                  this.handleChangeField(e, 'clientSelect');
+                }}
+              >
+                <MenuItem value={'Aiden'}>Aiden</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              fullWidth
+              name="name"
+              label="Name"
+              onChange={(e) => {
+                this.handleChangeField(e, 'name');
+              }}
+              value={invoice.name}
+            />
+            <TextField
+              fullWidth
+              name="email"
+              label="Email"
+              onChange={(e) => {
+                this.handleChangeField(e, 'email');
+              }}
+              value={invoice.email}
+            />
 
-        <InvoiceText>The invoice is for...</InvoiceText>
-        <TextField
-          className={classes.TextField}
-          name="projectName"
-          label="Project Name"
-          onChange={(e) => {
-            this.handleChangeField(e, 'projectName');
-          }}
-          value={invoice.projectName}
-        />
+            <InvoiceText>The invoice is for...</InvoiceText>
+            <TextField
+              fullWidth
+              name="projectName"
+              label="Project Name"
+              onChange={(e) => {
+                this.handleChangeField(e, 'projectName');
+              }}
+              value={invoice.projectName}
+            />
 
-        <InvoiceText>and is billed from...</InvoiceText>
-        <Select
-          value={invoice.billedSelect}
-          onChange={(e) => {
-            this.handleChangeField(e, 'billedSelect');
-          }}
-        >
-          <MenuItem value={1}>One time</MenuItem>
-        </Select>
+            <InvoiceText>and is billed from...</InvoiceText>
+            <Select
+              fullWidth
+              value={invoice.billedSelect}
+              onChange={(e) => {
+                this.handleChangeField(e, 'billedSelect');
+              }}
+            >
+              <MenuItem value={1}>One time</MenuItem>
+            </Select>
+          </FormWrapper>
+        </FormContainer>
         <ButtonContainer>
           <Button
             color="primary"
@@ -90,8 +96,28 @@ class InvoiceForm extends Component {
   }
 }
 
+const FormContainer = styled.div`
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  width: 80%;
+  margin: auto;
+  padding: 24pt;
+`;
+
+const FormWrapper = styled.div`
+  width: 50%;
+  margin: auto;
+`;
+
 const ButtonContainer = styled.div`
   text-align: center;
+  margin-top: 20pt;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const InvoiceText = styled.h4`
@@ -100,7 +126,7 @@ const InvoiceText = styled.h4`
 
 const styles = {
   formControl: {
-    width: '120px',
+    width: '100%',
   },
   TextField: {
     display: 'flex',
