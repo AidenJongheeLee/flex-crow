@@ -1,9 +1,11 @@
+import { CHANGE_NAME, CHANGE_TAB } from './types';
 
-import { CHANGE_NAME } from './types';
+export const changeName = newName => ({
+  payload: newName,
+  type: CHANGE_NAME,
+});
 
-export const changeName = (newName) => {
-  return {
-    type: CHANGE_NAME,
-    payload: newName
-  };
-};
+export const changeTab = newName => ({
+  payload: newName,
+  type: CHANGE_TAB,
+});
