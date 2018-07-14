@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { TextField, FormControl, InputLabel, MenuItem, Select, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-class CreateInvoice extends Component {
+class InvoiceForm extends Component {
   static propTypes = {
     classes: object.isRequired,
   };
@@ -22,9 +22,9 @@ class CreateInvoice extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, handleNext } = this.props;
     return (
-      <MainContainer>
+      <div>
         <h2>Create New Invoice</h2>
         <InvoiceText>This invoice is billed to...</InvoiceText>
         <FormControl className={classes.formControl}>
@@ -79,9 +79,16 @@ class CreateInvoice extends Component {
         </Select>
         <ButtonContainer>
           <Button onClick={() => {}}>Previous</Button>
-          <Button color="primary">Next</Button>
+          <Button
+            color="primary"
+            onClick={() => {
+              handleNext();
+            }}
+          >
+            Next
+          </Button>
         </ButtonContainer>
-      </MainContainer>
+      </div>
     );
   }
 }
@@ -94,10 +101,6 @@ const InvoiceText = styled.h4`
   margin-bottom: 1pt;
 `;
 
-const MainContainer = styled.div`
-  padding: 30px;
-`;
-
 const styles = {
   formControl: {
     width: '120px',
@@ -105,8 +108,8 @@ const styles = {
   TextField: {
     display: 'flex',
     width: '120px',
-    marginTop: '10pt',
+    marginTop: '5pt',
   },
 };
 
-export default withStyles(styles)(CreateInvoice);
+export default withStyles(styles)(InvoiceForm);

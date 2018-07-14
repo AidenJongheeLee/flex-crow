@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 import { remoteChangeName } from '../actions';
 import Dashboard from './Dashboard';
 import Sidebar from './Sidebar';
-import CreateInvoice from './CreateInovice';
+import CreateInvoiceContainer from './CreateInvoiceContainer';
 
 class Home extends Component {
   static propTypes = {
@@ -27,7 +27,7 @@ class Home extends Component {
           {name}
         </Button>
         <Dashboard />
-        <CreateInvoice />
+        <CreateInvoiceContainer />
         SuccessFully Rendered Home
       </MainContainer>
     );
