@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { changeName } from '../actions';
+import { remoteChangeName } from '../actions';
 import Dashboard from './Dashboard';
 import Sidebar from './Sidebar';
 import CreateInvoice from './CreateInovice';
@@ -11,17 +11,17 @@ import CreateInvoice from './CreateInovice';
 class Home extends Component {
   static propTypes = {
     name: string.isRequired,
-    changeName: func.isRequired,
+    remoteChangeName: func.isRequired,
   };
 
   render() {
-    const { changeName, name } = this.props;
+    const { remoteChangeName, name } = this.props;
     return (
       <MainContainer>
         <Sidebar />
         <Button
           onClick={() => {
-            changeName('Jonny');
+            remoteChangeName('Jonny');
           }}
         >
           {name}
@@ -44,5 +44,5 @@ const mapStatetoProps = state => ({
 
 export default connect(
   mapStatetoProps,
-  { changeName },
+  { remoteChangeName },
 )(Home);
