@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import { ThemeProvider } from 'styled-components';
 import ReduxThunk from 'redux-thunk';
 // import { DrizzleProvider } from 'drizzle-react'
 import reducers from './reducers';
+import { theme } from './styles/Theme';
 
 import Home from './containers/Home';
 
@@ -25,9 +26,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <MuiThemeProvider theme={muiTheme}>
-          <Home />
-        </MuiThemeProvider>
+        <ThemeProvider theme={theme}>
+          <MuiThemeProvider theme={muiTheme}>
+            <Home />
+          </MuiThemeProvider>
+        </ThemeProvider>
       </Provider>
     );
   }
