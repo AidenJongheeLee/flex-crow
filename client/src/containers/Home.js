@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import UIStore from '../stores/UIStore';
 import { changeName } from '../actions';
 import Dashboard from './Dashboard';
 import Sidebar from './Sidebar';
@@ -20,6 +21,7 @@ class Home extends Component {
 
   render() {
     const { changeName, name } = this.props;
+    console.log(UIStore);
     console.log(this.props);
     return (
       <MainContainer>
