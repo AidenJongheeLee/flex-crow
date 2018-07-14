@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
 import { changeName } from '../actions';
 
 class Home extends Component {
@@ -7,12 +8,12 @@ class Home extends Component {
     console.log(this.props);
     return (
       <div>
-        <button
+        <Button
           onClick={() => {
             this.props.changeName('Jonny');
           }}>
           {this.props.name}
-        </button>
+        </Button>
         SuccessFully Rendered Home
       </div>
     );
