@@ -1,4 +1,3 @@
-
 import { CHANGE_NAME } from '../actions/types';
 
 const initialState = {
@@ -8,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_NAME:
-      return { ...state, name: action.payload }
+      return { ...state, name: action.payload };
     default:
       return state;
   }
