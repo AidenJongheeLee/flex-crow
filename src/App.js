@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import { DrizzleProvider } from 'drizzle-react'
 import reducers from './reducers';
 
 import Home from './containers/Home';
