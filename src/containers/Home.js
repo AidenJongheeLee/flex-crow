@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { changeName } from '../actions';
+import Sidebar from './Sidebar';
 
 class Home extends Component {
   static propTypes = {
@@ -19,7 +21,8 @@ class Home extends Component {
     const { changeName, name } = this.props;
     console.log(this.props);
     return (
-      <div>
+      <MainContainer>
+        <Sidebar />
         <Button
           onClick={() => {
             changeName('Jonny');
@@ -28,10 +31,14 @@ class Home extends Component {
           {name}
         </Button>
         SuccessFully Rendered Home
-      </div>
+      </MainContainer>
     );
   }
 }
+
+const MainContainer = styled.div`
+  margin-left: 80px;
+`;
 
 const mapStatetoProps = state => ({
   name: state.user.name,
