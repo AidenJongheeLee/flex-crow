@@ -10,7 +10,8 @@
     "jsx-a11y/href-no-hash": "off"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "parser": "babel-eslint"
 }
