@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import UIStore from '../stores/UIStore';
 import { changeName } from '../actions';
+import Dashboard from './Dashboard';
 import Sidebar from './Sidebar';
 
 class Home extends Component {
@@ -32,6 +33,7 @@ class Home extends Component {
         >
           {name}
         </Button>
+        <Dashboard />
         SuccessFully Rendered Home
       </MainContainer>
     );
