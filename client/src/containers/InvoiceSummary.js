@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, InputAdornment } from '@material-ui/core';
 
 class InvoiceSummary extends Component {
   static propTypes = {
@@ -50,6 +50,9 @@ class InvoiceSummary extends Component {
             disabled
             label="Total cost"
             value={invoice.price}
+            InputProps={{
+              startAdornment: <InputAdornment>ETH </InputAdornment>,
+            }}
           />
         </InvoiceContainer>
 

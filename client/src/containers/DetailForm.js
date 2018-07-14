@@ -40,7 +40,7 @@ class DetailForm extends Component {
             this.handleChange(e, 'price');
           }}
           InputProps={{
-            startAdornment: <InputAdornment>$</InputAdornment>,
+            startAdornment: <InputAdornment>ETH </InputAdornment>,
           }}
         />
 
