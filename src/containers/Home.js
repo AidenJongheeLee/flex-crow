@@ -3,6 +3,7 @@ import { string, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { changeName } from '../actions';
+import Dashboard from './Dashboard';
 
 class Home extends Component {
   static propTypes = {
@@ -27,6 +28,7 @@ class Home extends Component {
         >
           {name}
         </Button>
+        <Dashboard />
         SuccessFully Rendered Home
       </div>
     );
