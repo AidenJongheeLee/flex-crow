@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import UserReducer from './User';
+import NavigationReducer from './Navigation';
 
 export default combineReducers({
-  user: UserReducer
+  user: UserReducer,
+  navigation: NavigationReducer,
 });
