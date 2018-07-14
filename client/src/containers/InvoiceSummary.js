@@ -23,41 +23,43 @@ class InvoiceSummary extends Component {
       <div>
         <h2>Create New Invoice</h2>
         <InvoiceContainer>
-          <InvoiceHeader>Invoice#</InvoiceHeader>
-          <TopContainer>
-            <TextField fullWidth disabled label="From" value={invoice.clientSelect} />
+          <SummaryWrapper>
+            <InvoiceHeader>Invoice#</InvoiceHeader>
+            <TopContainer>
+              <TextField fullWidth disabled label="From" value={invoice.clientSelect} />
+              <TextField
+                fullWidth
+                className={classes.spacingLeft}
+                disabled
+                label="To"
+                value={invoice.name}
+              />
+            </TopContainer>
             <TextField
+              className={classes.spacingTop}
               fullWidth
-              className={classes.spacingLeft}
               disabled
-              label="To"
-              value={invoice.name}
+              label="Project Name"
+              value={invoice.projectName}
             />
-          </TopContainer>
-          <TextField
-            className={classes.spacingTop}
-            fullWidth
-            disabled
-            label="Project Name"
-            value={invoice.projectName}
-          />
-          <TextField
-            className={classes.spacingTop}
-            fullWidth
-            disabled
-            label="Service Detail"
-            value={invoice.serviceDetail}
-          />
-          <TextField
-            className={classes.spacingTop}
-            fullWidth
-            disabled
-            label="Total cost"
-            value={invoice.price}
-            InputProps={{
-              startAdornment: <InputAdornment>ETH </InputAdornment>,
-            }}
-          />
+            <TextField
+              className={classes.spacingTop}
+              fullWidth
+              disabled
+              label="Service Detail"
+              value={invoice.serviceDetail}
+            />
+            <TextField
+              className={classes.spacingTop}
+              fullWidth
+              disabled
+              label="Total cost"
+              value={invoice.price}
+              InputProps={{
+                startAdornment: <InputAdornment>ETH </InputAdornment>,
+              }}
+            />
+          </SummaryWrapper>
         </InvoiceContainer>
 
         <ButtonContainer>
@@ -91,6 +93,11 @@ const styles = {
   },
 };
 
+const SummaryWrapper = styled.div`
+  width: 50%;
+  margin: auto;
+`;
+
 const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 20pt;
@@ -111,10 +118,9 @@ const InvoiceContainer = styled.div`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   border-radius: 2px;
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding: 24pt;
-  text-align: center;
 `;
 
 const mapStateToProps = state => ({
