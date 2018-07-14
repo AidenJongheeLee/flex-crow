@@ -12,6 +12,10 @@ class InvoiceSummary extends Component {
     handleBack: func.isRequired,
   };
 
+  handleClick = () => {
+    console.log('hai');
+  }
+
   render() {
     const { invoice, classes, handleBack } = this.props;
 
@@ -57,7 +61,7 @@ class InvoiceSummary extends Component {
         </InvoiceContainer>
 
         <ButtonContainer>
-          <Button className={classes.buttons} color="primary">
+          <Button className={classes.buttons} color="primary" onClick={this.handleClick}>
             Send Invoice
           </Button>
 
