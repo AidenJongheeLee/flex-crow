@@ -13,7 +13,7 @@ import { changeTab } from '../actions';
 class Sidebar extends Component {
   handleClick = (tabNumber) => {
     this.props.changeTab(tabNumber);
-  }
+  };
 
   render() {
     return (
@@ -74,4 +74,7 @@ Sidebar.propTypes = {
   changeTab: PropTypes.func.isRequired,
 };
 
-export default connect(null, { changeTab })(Sidebar);
+export default connect(
+  null,
+  { changeTab },
+)(Sidebar);

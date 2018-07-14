@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Stepper from '@material-ui/core/Stepper';
-import { withStyles } from '@material-ui/core/styles';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import InvoiceForm from './InvoiceForm';
+import DetailForm from './DetailForm';
+import InvoiceSummary from './InvoiceSummary';
 
 class CreateInvoiceContainer extends Component {
   state = {
@@ -34,6 +35,10 @@ class CreateInvoiceContainer extends Component {
           ))}
         </Stepper>
         {activeStep === 0 && <InvoiceForm handleNext={this.handleNext} />}
+        {activeStep === 1 && (
+          <DetailForm handleNext={this.handleNext} handleBack={this.handleBack} />
+        )}
+        {activeStep === 2 && <InvoiceSummary handleBack={this.handleBack} />}
       </MainContainer>
     );
   }

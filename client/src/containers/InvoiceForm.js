@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
-import { object } from 'prop-types';
+import { object, func } from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { TextField, FormControl, InputLabel, MenuItem, Select, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { updateInovie } from '../actions';
 
 class InvoiceForm extends Component {
   static propTypes = {
     classes: object.isRequired,
-  };
-
-  state = {
-    clientSelect: '',
-    name: '',
-    email: '',
-    projectName: '',
-    billedSelect: 1,
+    handleNext: func.isRequired,
+    invoice: object.isRequired,
+    updateInovie: func.isRequired,
   };
 
   handleChangeField = (e, field) => {
-    this.setState({ [field]: e.target.value });
+    const { updateInovie } = this.props;
+    updateInovie({ field, value: e.target.value });
   };
 
   render() {
-    const { classes, handleNext } = this.props;
+    const { classes, handleNext, invoice } = this.props;
     return (
       <div>
         <h2>Create New Invoice</h2>
@@ -30,12 +28,12 @@ class InvoiceForm extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="name-error">New Client</InputLabel>
           <Select
-            value={this.state.clientSelect}
+            value={invoice.clientSelect}
             onChange={(e) => {
-              this.setState({ clientSelect: e.target.value });
+              this.handleChangeField(e, 'clientSelect');
             }}
           >
-            <MenuItem value={1}>Aiden</MenuItem>
+            <MenuItem value={'Aiden'}>Aiden</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -45,7 +43,7 @@ class InvoiceForm extends Component {
           onChange={(e) => {
             this.handleChangeField(e, 'name');
           }}
-          value={this.state.name}
+          value={invoice.name}
         />
         <TextField
           className={classes.TextField}
@@ -54,7 +52,7 @@ class InvoiceForm extends Component {
           onChange={(e) => {
             this.handleChangeField(e, 'email');
           }}
-          value={this.state.email}
+          value={invoice.email}
         />
 
         <InvoiceText>The invoice is for...</InvoiceText>
@@ -62,23 +60,22 @@ class InvoiceForm extends Component {
           className={classes.TextField}
           name="projectName"
           label="Project Name"
-          onClick={(e) => {
+          onChange={(e) => {
             this.handleChangeField(e, 'projectName');
           }}
-          value={this.state.projectName}
+          value={invoice.projectName}
         />
 
         <InvoiceText>and is billed from...</InvoiceText>
         <Select
-          value={this.state.billedSelect}
+          value={invoice.billedSelect}
           onChange={(e) => {
-            this.setState({ billedSelect: e.target.value });
+            this.handleChangeField(e, 'billedSelect');
           }}
         >
           <MenuItem value={1}>One time</MenuItem>
         </Select>
         <ButtonContainer>
-          <Button onClick={() => {}}>Previous</Button>
           <Button
             color="primary"
             onClick={() => {
@@ -94,7 +91,7 @@ class InvoiceForm extends Component {
 }
 
 const ButtonContainer = styled.div`
-  text-align: right;
+  text-align: center;
 `;
 
 const InvoiceText = styled.h4`
@@ -112,4 +109,11 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(InvoiceForm);
+const mapStatetoProps = state => ({
+  invoice: state.invoice,
+});
+
+export default connect(
+  mapStatetoProps,
+  { updateInovie },
+)(withStyles(styles)(InvoiceForm));
