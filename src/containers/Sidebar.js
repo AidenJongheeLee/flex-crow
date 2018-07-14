@@ -1,3 +1,4 @@
+/* eslint global-require: "off" */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import AddBox from '@material-ui/icons/AddBox';
