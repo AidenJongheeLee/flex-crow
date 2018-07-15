@@ -1,11 +1,12 @@
 import { INVOICE_UPDATE } from '../actions/types';
 
 const initialState = {
-  clientSelect: '',
+  newClient: false,
+  selectedClient: '',
   name: '',
   email: '',
   projectName: '',
-  billedSelect: 1,
+  billingFrequency: 'one-time',
   serviceDetail: '',
   price: '',
 };

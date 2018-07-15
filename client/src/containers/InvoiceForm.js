@@ -4,19 +4,29 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { TextField, FormControl, InputLabel, MenuItem, Select, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { updateInovie } from '../actions';
+import { updateInvoice } from '../actions';
 
 class InvoiceForm extends Component {
   static propTypes = {
     classes: object.isRequired,
     handleNext: func.isRequired,
     invoice: object.isRequired,
-    updateInovie: func.isRequired,
+    updateInvoice: func.isRequired,
   };
 
-  handleChangeField = (e, field) => {
-    const { updateInovie } = this.props;
-    updateInovie({ field, value: e.target.value });
+  handleChangeField = (value, field) => {
+    const { updateInvoice } = this.props;
+    updateInvoice({ field, value });
+  };
+
+  handleSelectClient = (value) => {
+    const { updateInvoice } = this.props;
+    if (value !== 'create') {
+      updateInvoice({ field: 'selectedClient', value });
+    } else {
+      updateInvoice({ field: 'newClient', value: true });
+      updateInvoice({ field: 'selectedClient', value: 'create' });
+    }
   };
 
   render() {
@@ -26,58 +36,66 @@ class InvoiceForm extends Component {
         <h2>Create New Invoice</h2>
         <FormContainer>
           <FormWrapper>
-            <InvoiceText>This invoice is billed to...</InvoiceText>
+            <InvoiceText marginBottom="4pt">This invoice is billed to...</InvoiceText>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="name-error">New Client</InputLabel>
+              <InputLabel htmlFor="name-error">Client</InputLabel>
               <Select
                 fullWidth
-                value={invoice.clientSelect}
+                value={invoice.selectedClient}
                 onChange={(e) => {
-                  this.handleChangeField(e, 'clientSelect');
+                  this.handleSelectClient(e.target.value);
                 }}
               >
-                <MenuItem value={'Aiden'}>Aiden</MenuItem>
+                <MenuItem value="create">Add New Client</MenuItem>
               </Select>
             </FormControl>
-            <TextField
-              fullWidth
-              name="name"
-              label="Name"
-              onChange={(e) => {
-                this.handleChangeField(e, 'name');
-              }}
-              value={invoice.name}
-            />
-            <TextField
-              fullWidth
-              name="email"
-              label="Email"
-              onChange={(e) => {
-                this.handleChangeField(e, 'email');
-              }}
-              value={invoice.email}
-            />
+            {invoice.newClient && (
+              <TextFieldContainer>
+                <TextField
+                  className={classes.TextField}
+                  fullWidth
+                  name="name"
+                  label="Client Name"
+                  onChange={(e) => {
+                    this.handleChangeField(e.target.value, 'name');
+                  }}
+                  value={invoice.name}
+                />
+                <TextField
+                  className={classes.TextField}
+                  fullWidth
+                  name="email"
+                  label="Client Email"
+                  onChange={(e) => {
+                    this.handleChangeField(e.target.value, 'email');
+                  }}
+                  value={invoice.email}
+                />
+              </TextFieldContainer>
+            )}
 
             <InvoiceText>The invoice is for...</InvoiceText>
             <TextField
+              className={classes.TextField}
               fullWidth
               name="projectName"
               label="Project Name"
               onChange={(e) => {
-                this.handleChangeField(e, 'projectName');
+                this.handleChangeField(e.target.value, 'projectName');
               }}
               value={invoice.projectName}
             />
 
-            <InvoiceText>and is billed from...</InvoiceText>
+            <InvoiceText>and to be billed...</InvoiceText>
             <Select
               fullWidth
-              value={invoice.billedSelect}
+              value={invoice.billingFrequency}
               onChange={(e) => {
-                this.handleChangeField(e, 'billedSelect');
+                this.handleChangeField(e.target.value, 'billingFrequency');
               }}
             >
-              <MenuItem value={1}>One time</MenuItem>
+              <MenuItem value="one-time">One-time</MenuItem>
+              <MenuItem value="Recurring">Recurring</MenuItem>
             </Select>
           </FormWrapper>
         </FormContainer>
@@ -95,6 +113,10 @@ class InvoiceForm extends Component {
     );
   }
 }
+
+const TextFieldContainer = styled.div`
+  margin-top: 10pt;
+`;
 
 const FormContainer = styled.div`
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -116,12 +138,12 @@ const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 20pt;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const InvoiceText = styled.h4`
-  margin-bottom: 1pt;
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '1pt')};
 `;
 
 const styles = {
@@ -129,9 +151,7 @@ const styles = {
     width: '100%',
   },
   TextField: {
-    display: 'flex',
-    width: '120px',
-    marginTop: '5pt',
+    marginTop: '10pt',
   },
 };
 
@@ -141,5 +161,5 @@ const mapStatetoProps = state => ({
 
 export default connect(
   mapStatetoProps,
-  { updateInovie },
+  { updateInvoice },
 )(withStyles(styles)(InvoiceForm));

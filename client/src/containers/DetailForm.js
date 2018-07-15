@@ -2,24 +2,26 @@ import React, { Component } from 'react';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
 import { TextField, InputAdornment, Button } from '@material-ui/core';
-import { updateInovie } from '../actions';
+import { updateInvoice } from '../actions';
 
 class DetailForm extends Component {
   static propTypes = {
     handleBack: func.isRequired,
     handleNext: func.isRequired,
     invoice: object.isRequired,
-    updateInovie: func.isRequired,
+    updateInvoice: func.isRequired,
+    classes: object.isRequired,
   };
 
   handleChange = (e, field) => {
-    const { updateInovie } = this.props;
-    updateInovie({ field, value: e.target.value });
+    const { updateInvoice } = this.props;
+    updateInvoice({ field, value: e.target.value });
   };
 
   render() {
-    const { handleNext, handleBack, invoice } = this.props;
+    const { handleNext, handleBack, invoice, classes } = this.props;
     return (
       <div>
         <h2>Create New Invoice</h2>
@@ -35,16 +37,15 @@ class DetailForm extends Component {
               }}
             />
 
-            <DetailText>Which costs ~ totla of...</DetailText>
+            <DetailText>Which costs a total of...</DetailText>
             <TextField
-              fullWidth
               type="number"
               value={invoice.price}
               onChange={(e) => {
                 this.handleChange(e, 'price');
               }}
               InputProps={{
-                startAdornment: <InputAdornment>ETH </InputAdornment>,
+                endAdornment: <InputAdornment>ETH </InputAdornment>,
               }}
             />
           </MainWrapper>
@@ -52,19 +53,20 @@ class DetailForm extends Component {
 
         <ButtonContainer>
           <Button
+            onClick={() => {
+              handleBack();
+            }}
+          >
+            Previous
+          </Button>
+          <Button
+            className={classes.button}
             color="primary"
             onClick={() => {
               handleNext();
             }}
           >
             Next
-          </Button>
-          <Button
-            onClick={() => {
-              handleBack();
-            }}
-          >
-            Previous
           </Button>
         </ButtonContainer>
       </div>
@@ -92,19 +94,27 @@ const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 20pt;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const DetailText = styled.h4`
   margin-bottom: 1pt;
 `;
 
+const styles = {
+  button: {
+    marginLeft: '10pt',
+  },
+};
+
 const mapStatetoProps = state => ({
   invoice: state.invoice,
 });
 
-export default connect(
-  mapStatetoProps,
-  { updateInovie },
-)(DetailForm);
+export default withStyles(styles)(
+  connect(
+    mapStatetoProps,
+    { updateInvoice },
+  )(DetailForm),
+);

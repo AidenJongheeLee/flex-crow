@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { submitInvoice } from '../actions';
@@ -9,13 +10,17 @@ class Dashboard extends Component {
   }
   render() {
     return (
-      <div>
-        <div>SuccessFully Rendered Dashboard</div>
+      <MainContainer>
+        <h2>Invoice Summary</h2>
         <button onClick={this.handleClick}>Submit</button>
-      </div>
+      </MainContainer>
     );
   }
 }
+
+const MainContainer = styled.div`
+  padding: 30px;
+`;
 
 const mapStateToProps = state => ({
   invoice: state.invoice,

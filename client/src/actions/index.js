@@ -34,7 +34,7 @@ export const submitInvoice = invoiceData => async (dispatch) => {
   }
 };
 
-export const updateInovie = ({ field, value }) => ({
+export const updateInvoice = ({ field, value }) => ({
   type: INVOICE_UPDATE,
   payload: { field, value },
 });
