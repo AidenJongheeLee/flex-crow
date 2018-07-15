@@ -16,11 +16,11 @@ import {
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { cancelInvoice, fetchInvoices } from '../actions';
+import { submitPayment, fetchInvoices } from '../actions';
 
 class Dashboard extends Component {
   static propTypes = {
-    cancelInvoice: func.isRequired,
+    submitPayment: func.isRequired,
     fetchInvoices: func.isRequired,
     invoices: object.isRequired,
   };
@@ -37,7 +37,7 @@ class Dashboard extends Component {
   }
 
   handleClick = () => {
-    this.props.cancelInvoice(3);
+    this.props.submitPayment(3, 99);
   };
 
   handleClose = () => {
@@ -173,5 +173,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { cancelInvoice, fetchInvoices },
+  { submitPayment, fetchInvoices },
 )(Dashboard);
