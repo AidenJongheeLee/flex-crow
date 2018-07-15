@@ -7,4 +7,5 @@ exports.theme = {
   backgroundColor: '#f5f5f5',
   wBackgroundColor: '#ffffff',
   hoverColor: 'rgba(0, 0, 0, 0.08)',
+  secondaryColor: '#3f51b5',
 };

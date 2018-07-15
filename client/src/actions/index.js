@@ -6,6 +6,7 @@ import {
   START_REQUEST,
   REQUEST_SUCCESS,
   REQUEST_ERROR,
+  SELECT_TIMELOG,
 } from './types';
 
 export const changeTab = newTab => ({
@@ -65,3 +66,11 @@ export const updateInvoice = ({ field, value }) => ({
   type: INVOICE_UPDATE,
   payload: { field, value },
 });
+
+export const selectTimeLog = (selected) => {
+  console.log('value ', selected);
+  return {
+    type: SELECT_TIMELOG,
+    payload: selected,
+  };
+};

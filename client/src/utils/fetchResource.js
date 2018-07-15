@@ -1,5 +1,3 @@
-import { invoices } from './fakeResponses';
-
 const baseUrl = 'https://a5c9c29c.ngrok.io';
 
 const fetchInvoices = async () => {

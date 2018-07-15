@@ -1,13 +1,13 @@
 /* eslint global-require: "off" */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AddBox from '@material-ui/icons/AddBox';
 import Settings from '@material-ui/icons/Settings';
 import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Tooltip } from '@material-ui/core';
+import Receipt from '@material-ui/icons/Receipt';
+import Schedule from '@material-ui/icons/Schedule';
 import { changeTab } from '../actions';
 
 class Sidebar extends Component {
@@ -22,17 +22,20 @@ class Sidebar extends Component {
           <IconButton onClick={() => this.handleClick(1)}>
             <LogoIcon src={require('../images/flex-bill.png')} alt="logo" />
           </IconButton>
-          <Tooltip title="Create New Invoice">
-            <IconButton onClick={() => this.handleClick(2)}>
-              <AddBox color="primary" />
-            </IconButton>
-          </Tooltip>
+
+          <IconButton onClick={() => this.handleClick(1)}>
+            <Receipt />
+          </IconButton>
+
+          <IconButton onClick={() => this.handleClick(3)}>
+            <Schedule />
+          </IconButton>
         </TopIconContainer>
         <BottomIcon>
-          <IconButton onClick={() => this.handleClick(3)}>
+          <IconButton onClick={() => this.handleClick(4)}>
             <Settings />
           </IconButton>
-          <IconButton onClick={() => this.handleClick(4)}>
+          <IconButton onClick={() => this.handleClick(5)}>
             <PowerSettingsNew />
           </IconButton>
         </BottomIcon>

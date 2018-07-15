@@ -15,10 +15,11 @@ import {
   MenuItem,
   Snackbar,
   CircularProgress,
+  Button,
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { fetchInvoices, submitPayment } from '../actions';
+import { fetchInvoices, submitPayment, changeTab } from '../actions';
 import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
@@ -28,6 +29,7 @@ class Dashboard extends Component {
     invoices: object.isRequired,
     loading: bool.isRequired,
     classes: object.isRequired,
+    changeTab: func.isRequired,
   };
 
   state = {
@@ -114,11 +116,20 @@ class Dashboard extends Component {
           <div>
             <h2>Invoice Summary</h2>
             <button onClick={this.handleClick}>Test Action</button>
+            <Button
+              onClick={() => {
+                this.props.changeTab(2);
+              }}
+              color="primary"
+              variant="contained"
+            >
+              Create New Invoice
+            </Button>
+
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
                     <TableCell>Client Name</TableCell>
                     <TableCell>Total Amount (ETH)</TableCell>
                     <TableCell>Status</TableCell>
@@ -137,7 +148,6 @@ class Dashboard extends Component {
                           this.setState({ selectedInvoice: invoice, dashboardDialog: true });
                         }}
                       >
-                        <TableCell>{invoice.id}</TableCell>
                         <TableCell>{invoice.sender_name}</TableCell>
                         <TableCell>{invoice.total_cost}</TableCell>
                         <TableCell>
@@ -208,7 +218,7 @@ const styles = {
 };
 
 const LoadingContainer = styled.div`
-  height: 500px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,6 +238,7 @@ const TableContainer = styled.div`
   margin: auto;
   padding: 24pt;
   width: 100%;
+  margin-top: 16pt;
   background-color: ${props => props.theme.wBackgroundColor};
 `;
 
@@ -246,6 +257,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { submitPayment, fetchInvoices },
+    { submitPayment, fetchInvoices, changeTab },
   )(Dashboard),
 );
