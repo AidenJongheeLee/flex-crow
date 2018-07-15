@@ -54,20 +54,20 @@ class InvoiceForm extends Component {
                 <TextField
                   className={classes.TextField}
                   fullWidth
-                  name="name"
+                  name="sender_name"
                   label="Client Name"
                   onChange={(e) => {
-                    this.handleChangeField(e.target.value, 'name');
+                    this.handleChangeField(e.target.value, e.target.name);
                   }}
                   value={invoice.name}
                 />
                 <TextField
                   className={classes.TextField}
                   fullWidth
-                  name="email"
+                  name="to_email"
                   label="Client Email"
                   onChange={(e) => {
-                    this.handleChangeField(e.target.value, 'email');
+                    this.handleChangeField(e.target.value, e.target.name);
                   }}
                   value={invoice.email}
                 />
@@ -78,10 +78,10 @@ class InvoiceForm extends Component {
             <TextField
               className={classes.TextField}
               fullWidth
-              name="projectName"
+              name="project_name"
               label="Project Name"
               onChange={(e) => {
-                this.handleChangeField(e.target.value, 'projectName');
+                this.handleChangeField(e.target.value, e.target.name);
               }}
               value={invoice.projectName}
             />
@@ -89,12 +89,12 @@ class InvoiceForm extends Component {
             <InvoiceText>and to be billed...</InvoiceText>
             <Select
               fullWidth
-              value={invoice.billingFrequency}
+              value={invoice.invoice_type}
               onChange={(e) => {
-                this.handleChangeField(e.target.value, 'billingFrequency');
+                this.handleChangeField(e.target.value, 'invoice_type');
               }}
             >
-              <MenuItem value="one-time">One-time</MenuItem>
+              <MenuItem value="One-time">One-time</MenuItem>
               <MenuItem value="Recurring">Recurring</MenuItem>
             </Select>
           </FormWrapper>

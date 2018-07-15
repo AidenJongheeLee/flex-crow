@@ -33,7 +33,7 @@ class DetailForm extends Component {
               value={invoice.serviceDetail}
               multiline
               onChange={(e) => {
-                this.handleChange(e, 'serviceDetail');
+                this.handleChange(e, 'description');
               }}
             />
 
@@ -42,7 +42,7 @@ class DetailForm extends Component {
               type="number"
               value={invoice.price}
               onChange={(e) => {
-                this.handleChange(e, 'price');
+                this.handleChange(e, 'total_cost');
               }}
               InputProps={{
                 endAdornment: <InputAdornment>ETH </InputAdornment>,

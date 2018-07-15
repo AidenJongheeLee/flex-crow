@@ -17,7 +17,7 @@ class InvoiceSummary extends Component {
 
   handleClick = () => {
     this.props.submitInvoice(this.props.invoice);
-  }
+  };
 
   render() {
     const { invoice, classes, handleBack, user } = this.props;
@@ -34,38 +34,48 @@ class InvoiceSummary extends Component {
             </TopContainer>
             <TopContainer>
               <TextField className={classes.spacingTop} fullWidth disabled value={user.name} />
-              <TextField fullWidth className={classes.spacingLeft} disabled value={invoice.name} />
+              <TextField
+                fullWidth
+                className={classes.spacingLeft}
+                disabled
+                value={invoice.sender_name}
+              />
             </TopContainer>
             <TopContainer>
               <TextField className={classes.spacingTop} fullWidth disabled value={user.email} />
-              <TextField fullWidth className={classes.spacingLeft} disabled value={invoice.email} />
+              <TextField
+                fullWidth
+                className={classes.spacingLeft}
+                disabled
+                value={invoice.to_email}
+              />
             </TopContainer>
             <TextField
               className={classes.spacingTop}
               fullWidth
               disabled
               label="Project Name"
-              value={invoice.projectName}
+              value={invoice.project_name}
             />
             <TextField
               className={classes.spacingTop}
               fullWidth
               disabled
               label="Service Detail"
-              value={invoice.serviceDetail}
+              value={invoice.description}
             />
             <TextField
               className={classes.spacingTop}
               fullWidth
               disabled
               label="Billing Frequency"
-              value={invoice.billingFrequency}
+              value={invoice.invoice_type}
             />
             <TextField
               className={classes.spacingTop}
               disabled
               label="Total cost"
-              value={invoice.price}
+              value={invoice.total_cost}
               InputProps={{
                 endAdornment: <InputAdornment>ETH </InputAdornment>,
               }}
@@ -74,10 +84,6 @@ class InvoiceSummary extends Component {
         </InvoiceContainer>
 
         <ButtonContainer>
-          <Button className={classes.buttons} color="primary" onClick={this.handleClick}>
-            Send Invoice
-          </Button>
-
           <Button
             className={classes.buttons}
             onClick={() => {
@@ -86,7 +92,12 @@ class InvoiceSummary extends Component {
           >
             Previous
           </Button>
-          <Button variant="contained" className={classes.buttons} color="primary">
+          <Button
+            variant="contained"
+            onClick={this.handleClick}
+            className={classes.buttons}
+            color="primary"
+          >
             Send Invoice
           </Button>
         </ButtonContainer>

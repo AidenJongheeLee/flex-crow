@@ -3,13 +3,14 @@ import { INVOICE_UPDATE } from '../actions/types';
 const initialState = {
   newClient: false,
   selectedClient: '',
-  name: '',
-  email: '',
-  projectName: '',
-  billingFrequency: 'one-time',
-  serviceDetail: '',
-  price: '',
   id: 0,
+  user_id: 1,
+  sender_name: '',
+  to_email: '',
+  project_name: '',
+  invoice_type: 'One-time',
+  description: '',
+  total_cost: 0,
   status: 'unpaid',
 };
 
