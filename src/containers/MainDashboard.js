@@ -77,16 +77,7 @@ class MainDashboard extends Component {
                   .reverse()
                   .slice(0, 5)
                   .map(invoice => (
-                    <TableRow
-                      key={invoice.id}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        this.setState({
-                          selectedInvoice: invoice,
-                          dashboardDialog: true,
-                        });
-                      }}
-                    >
+                    <TableRow key={invoice.id}>
                       <TableCell>{invoice.sender_name}</TableCell>
                       <TableCell>{invoice.total_cost / 100} ETH</TableCell>
                       <TableCell>
