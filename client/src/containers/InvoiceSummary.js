@@ -25,7 +25,7 @@ class InvoiceSummary extends Component {
       <div>
         <InvoiceContainer>
           <SummaryWrapper>
-            <SummaryForm invoice={invoice} />
+            <SummaryForm invoice={invoice} dashboard={false} />
           </SummaryWrapper>
         </InvoiceContainer>
 
@@ -89,6 +89,7 @@ const InvoiceContainer = styled.div`
   margin: auto;
   padding: 24pt;
   background-color: ${props => props.theme.wBackgroundColor};
+  padding-bottom: 48pt;
 `;
 
 const mapStateToProps = state => ({

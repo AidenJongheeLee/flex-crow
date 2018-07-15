@@ -68,10 +68,7 @@ export const updateInvoice = ({ field, value }) => ({
   payload: { field, value },
 });
 
-export const selectTimeLog = (selected) => {
-  console.log('value ', selected);
-  return {
-    type: SELECT_TIMELOG,
-    payload: selected,
-  };
-};
+export const selectTimeLog = selected => ({
+  type: SELECT_TIMELOG,
+  payload: selected,
+});

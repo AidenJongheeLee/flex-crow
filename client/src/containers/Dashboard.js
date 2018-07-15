@@ -117,7 +117,6 @@ class Dashboard extends Component {
         ) : (
           <div>
             <h2>Invoice Summary</h2>
-            <button onClick={this.handleClick}>Test Action</button>
             <Button
               onClick={() => {
                 this.props.changeTab(2);
@@ -240,7 +239,7 @@ const TableContainer = styled.div`
 
 const MainContainer = styled.div`
   padding: 30px 80px;
-  height: 100%;
+  height: auto;
   background-color: ${props => props.theme.backgroundColor};
 `;
 

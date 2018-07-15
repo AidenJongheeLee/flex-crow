@@ -13,13 +13,14 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { theme } from '../styles/Theme';
-import { selectTimeLog } from '../actions';
+import { selectTimeLog, changeTab } from '../actions';
 
 class TimeLogContainer extends Component {
   static propTypes = {
     timeLogs: object.isRequired,
     selectTimeLog: func.isRequired,
     classes: object.isRequired,
+    changeTab: func.isRequired,
   };
 
   handleSelectAll = () => {
@@ -54,11 +55,17 @@ class TimeLogContainer extends Component {
   };
 
   render() {
-    const { timeLogs, classes } = this.props;
+    const { timeLogs, classes, changeTab } = this.props;
     return (
       <MainContainer>
         <h2>Time Log</h2>
-        <Button color="primary" variant="contained" onClick={() => {}}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            changeTab(4);
+          }}
+        >
           Create New Time Log
         </Button>
 
@@ -139,6 +146,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { selectTimeLog },
+    { selectTimeLog, changeTab },
   )(TimeLogContainer),
 );

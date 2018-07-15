@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
-import { object, func } from 'prop-types';
+import { object, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, InputAdornment } from '@material-ui/core';
 import { submitInvoice } from '../actions';
@@ -12,6 +13,7 @@ class InvoiceSummary extends Component {
     classes: object.isRequired,
     submitInvoice: func.isRequired,
     user: object.isRequired,
+    dashboard: bool.isRequired,
   };
 
   handleClick = () => {
@@ -19,7 +21,7 @@ class InvoiceSummary extends Component {
   };
 
   render() {
-    const { invoice, classes, user } = this.props;
+    const { invoice, classes, user, dashboard } = this.props;
     return (
       <div>
         <InvoiceHeader>Invoice#</InvoiceHeader>
@@ -45,6 +47,27 @@ class InvoiceSummary extends Component {
             value={invoice.to_email || ''}
           />
         </TopContainer>
+
+        {dashboard && (
+          <TopContainer>
+            <TextField
+              label="Created at"
+              disabled
+              className={classes.spacingTop}
+              fullWidth
+              value={moment(invoice.created_at).format('MMM Do') || ''}
+            />
+
+            <TextField
+              label="Due Date"
+              disabled
+              className={classes.spacingLeft}
+              fullWidth
+              value="Aug 14th"
+            />
+          </TopContainer>
+        )}
+
         <TextField
           className={classes.spacingTop}
           fullWidth

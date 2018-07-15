@@ -32,10 +32,10 @@ class Sidebar extends Component {
           </IconButton>
         </TopIconContainer>
         <BottomIcon>
-          <IconButton onClick={() => this.handleClick(4)}>
+          <IconButton>
             <Settings />
           </IconButton>
-          <IconButton onClick={() => this.handleClick(5)}>
+          <IconButton>
             <PowerSettingsNew />
           </IconButton>
         </BottomIcon>

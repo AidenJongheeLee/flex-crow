@@ -16,7 +16,7 @@ class DashboardDialog extends Component {
     const { open, onClose, selectedInvoice, classes } = this.props;
     return (
       <Dialog classes={{ paper: classes.dialog }} open={open} onClose={onClose}>
-        <SummaryForm invoice={selectedInvoice} />
+        <SummaryForm invoice={selectedInvoice} dashboard />
       </Dialog>
     );
   }
@@ -24,7 +24,7 @@ class DashboardDialog extends Component {
 
 const styles = {
   dialog: {
-    padding: '10px 26pt 26pt 26pt',
+    padding: '14pt 32pt 48pt 32pt',
   },
 };
 

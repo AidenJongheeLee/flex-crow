@@ -88,6 +88,7 @@ const DetailContainer = styled.div`
   margin: auto;
   padding: 24pt;
   background-color: ${props => props.theme.wBackgroundColor};
+  padding-bottom: 48pt;
 `;
 
 const ButtonContainer = styled.div`

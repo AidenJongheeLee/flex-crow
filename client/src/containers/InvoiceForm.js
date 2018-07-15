@@ -34,7 +34,6 @@ class InvoiceForm extends Component {
   };
 
   render() {
-    console.log('clients:', this.props.clients);
     const { classes, handleNext, invoice, clients } = this.props;
     return (
       <div>
@@ -50,11 +49,11 @@ class InvoiceForm extends Component {
                   this.handleSelectClient(e.target.value);
                 }}
               >
-                {
-                  clients.map(client =>
-                    <MenuItem key={client.id} value={client.id}>{client.name}</MenuItem>,
-                  )
-                }
+                {clients.map(client => (
+                  <MenuItem key={client.id} value={client.id}>
+                    {client.name}
+                  </MenuItem>
+                ))}
                 <MenuItem value="create">Add New Client</MenuItem>
               </Select>
             </FormControl>
@@ -137,6 +136,7 @@ const FormContainer = styled.div`
   margin: auto;
   padding: 24pt;
   background-color: ${props => props.theme.wBackgroundColor};
+  padding-bottom: 48pt;
 `;
 
 const FormWrapper = styled.div`
