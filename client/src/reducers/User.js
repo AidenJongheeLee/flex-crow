@@ -2,6 +2,7 @@ import { CHANGE_NAME } from '../actions/types';
 
 const initialState = {
   name: 'Aiden',
+  email: 'test@test.com',
 };
 
 export default (state = initialState, action) => {

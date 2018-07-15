@@ -17,7 +17,7 @@ export const remoteChangeName = name => async (dispatch) => {
   return newName;
 };
 
-export const updateInovie = ({ field, value }) => ({
+export const updateInvoice = ({ field, value }) => ({
   type: INVOICE_UPDATE,
   payload: { field, value },
 });

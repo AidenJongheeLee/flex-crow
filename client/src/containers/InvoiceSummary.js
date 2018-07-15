@@ -10,10 +10,11 @@ class InvoiceSummary extends Component {
     invoice: object.isRequired,
     classes: object.isRequired,
     handleBack: func.isRequired,
+    user: object.isRequired,
   };
 
   render() {
-    const { invoice, classes, handleBack } = this.props;
+    const { invoice, classes, handleBack, user } = this.props;
 
     return (
       <div>
@@ -22,14 +23,16 @@ class InvoiceSummary extends Component {
           <SummaryWrapper>
             <InvoiceHeader>Invoice#</InvoiceHeader>
             <TopContainer>
-              <TextField fullWidth disabled label="From" value={invoice.clientSelect} />
-              <TextField
-                fullWidth
-                className={classes.spacingLeft}
-                disabled
-                label="To"
-                value={invoice.name}
-              />
+              <TextLabel>From</TextLabel>
+              <TextLabel last>To</TextLabel>
+            </TopContainer>
+            <TopContainer>
+              <TextField className={classes.spacingTop} fullWidth disabled value={user.name} />
+              <TextField fullWidth className={classes.spacingLeft} disabled value={invoice.name} />
+            </TopContainer>
+            <TopContainer>
+              <TextField className={classes.spacingTop} fullWidth disabled value={user.email} />
+              <TextField fullWidth className={classes.spacingLeft} disabled value={invoice.email} />
             </TopContainer>
             <TextField
               className={classes.spacingTop}
@@ -49,20 +52,22 @@ class InvoiceSummary extends Component {
               className={classes.spacingTop}
               fullWidth
               disabled
+              label="Billing Frequency"
+              value={invoice.billingFrequency}
+            />
+            <TextField
+              className={classes.spacingTop}
+              disabled
               label="Total cost"
               value={invoice.price}
               InputProps={{
-                startAdornment: <InputAdornment>ETH </InputAdornment>,
+                endAdornment: <InputAdornment>ETH </InputAdornment>,
               }}
             />
           </SummaryWrapper>
         </InvoiceContainer>
 
         <ButtonContainer>
-          <Button className={classes.buttons} color="primary">
-            Send Invoice
-          </Button>
-
           <Button
             className={classes.buttons}
             onClick={() => {
@@ -70,6 +75,9 @@ class InvoiceSummary extends Component {
             }}
           >
             Previous
+          </Button>
+          <Button variant="contained" className={classes.buttons} color="primary">
+            Send Invoice
           </Button>
         </ButtonContainer>
       </div>
@@ -79,15 +87,25 @@ class InvoiceSummary extends Component {
 
 const styles = {
   spacingLeft: {
-    marginLeft: '10pt',
+    marginLeft: '48pt',
+    marginTop: '10pt',
   },
   spacingTop: {
     marginTop: '10pt',
   },
   buttons: {
+    marginLeft: '10pt',
     width: '150px',
   },
 };
+
+const TextLabel = styled.p`
+  font-size: 1rem;
+  flex: 1;
+  color: rgba(0, 0, 0, 0.54);
+  margin-bottom: 0px;
+  margin-left: ${props => (props.last ? '48pt' : '0pt')};
+`;
 
 const SummaryWrapper = styled.div`
   width: 50%;
@@ -98,8 +116,8 @@ const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 20pt;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const TopContainer = styled.div`
@@ -121,6 +139,7 @@ const InvoiceContainer = styled.div`
 
 const mapStateToProps = state => ({
   invoice: state.invoice,
+  user: state.user,
 });
 
 export default withStyles(styles)(
