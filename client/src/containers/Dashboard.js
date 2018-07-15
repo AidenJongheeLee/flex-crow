@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { object } from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
+  static propTypes = {
+    invoices: object.isRequired,
+  };
+
   render() {
+    const { invoices } = this.props;
+    console.log(invoices);
     return (
       <MainContainer>
         <h2>Invoice Summary</h2>
@@ -18,7 +25,7 @@ const MainContainer = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  name: state.user.name,
+  invoices: state.invoices,
 });
 
 export default connect(

@@ -9,6 +9,7 @@ const initialState = {
   billingFrequency: 'one-time',
   serviceDetail: '',
   price: '',
+  id: 0,
 };
 
 export default (state = initialState, action) => {

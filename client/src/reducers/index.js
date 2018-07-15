@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import UserReducer from './User';
 import NavigationReducer from './Navigation';
-import InoviceReducer from './Invoice';
+import InvoiceReducer from './Invoice';
+import InvoicesReducer from './Invoices';
 
 export default combineReducers({
   user: UserReducer,
   navigation: NavigationReducer,
-  invoice: InoviceReducer,
+  invoice: InvoiceReducer,
+  invoices: InvoicesReducer,
 });
