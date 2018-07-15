@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { cancelInvoice, fetchInvoices } from '../actions';
+import { cancelInvoice, fetchInvoices, submitPayment } from '../actions';
 import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
