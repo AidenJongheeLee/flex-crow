@@ -76,7 +76,9 @@ class TimeLogContainer extends Component {
                 <TableCell>
                   <Checkbox
                     classes={{ checked: classes.checkbox }}
-                    checked={timeLogs.selected.length === timeLogs.timeLogs.length}
+                    checked={
+                      timeLogs.selected.length === timeLogs.timeLogs.length
+                    }
                     onChange={() => {
                       this.handleSelectAll();
                     }}
@@ -101,7 +103,7 @@ class TimeLogContainer extends Component {
                       />
                     </TableCell>
                     <TableCell>{timelog.project_name}</TableCell>
-                    <TableCell>{timelog.duration}</TableCell>
+                    <TableCell>{timelog.duration} hours</TableCell>
                     <TableCell>{timelog.created_at}</TableCell>
                   </TableRow>
                 ))}

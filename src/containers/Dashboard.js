@@ -19,7 +19,12 @@ import {
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { submitPayment, fetchInvoices, cancelInvoice, changeTab } from '../actions';
+import {
+  submitPayment,
+  fetchInvoices,
+  cancelInvoice,
+  changeTab,
+} from '../actions';
 import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
@@ -107,7 +112,13 @@ class Dashboard extends Component {
 
   render() {
     const { invoices, loading, classes } = this.props;
-    const { anchorEl, snackbarOpen, snackbarMsg, dashboardDialog, selectedInvoice } = this.state;
+    const {
+      anchorEl,
+      snackbarOpen,
+      snackbarMsg,
+      dashboardDialog,
+      selectedInvoice,
+    } = this.state;
     return (
       <div style={{ height: '100%' }}>
         {loading ? (
@@ -139,30 +150,37 @@ class Dashboard extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {invoices && invoices.invoices && invoices.invoices.length > 0 ? (
-                      invoices.invoices.map(invoice => (
-                        <TableRow
-                          hover
-                          className={classes.tableRow}
-                          key={invoice.id}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            this.setState({ selectedInvoice: invoice, dashboardDialog: true });
-                          }}
-                        >
-                          <TableCell>{invoice.sender_name}</TableCell>
-                          <TableCell>{invoice.total_cost / 100}</TableCell>
-                          <TableCell>
-                            <StatusLabel color={this.renderStatusColor(invoice)}>
-                              {_.upperCase(invoice.status)}
-                            </StatusLabel>
-                          </TableCell>
-                          <TableCell>{this.actionRequired(invoice)}</TableCell>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <tr />
-                    )}
+                    {invoices &&
+                    invoices.invoices &&
+                    invoices.invoices.length > 0 ? (
+                        invoices.invoices.map(invoice => (
+                          <TableRow
+                            hover
+                            className={classes.tableRow}
+                            key={invoice.id}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              this.setState({
+                                selectedInvoice: invoice,
+                                dashboardDialog: true,
+                              });
+                            }}
+                          >
+                            <TableCell>{invoice.sender_name}</TableCell>
+                            <TableCell>{invoice.total_cost / 100} ETH</TableCell>
+                            <TableCell>
+                              <StatusLabel
+                                color={this.renderStatusColor(invoice)}
+                              >
+                                {_.upperCase(invoice.status)}
+                              </StatusLabel>
+                            </TableCell>
+                            <TableCell>{this.actionRequired(invoice)}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <tr />
+                      )}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -172,12 +190,19 @@ class Dashboard extends Component {
                   selectedInvoice={selectedInvoice}
                   open={dashboardDialog}
                   onClose={() => {
-                    this.setState({ dashboardDialog: false, selectedInvoice: '' });
+                    this.setState({
+                      dashboardDialog: false,
+                      selectedInvoice: '',
+                    });
                   }}
                 />
               )}
 
-              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={this.handleClose}
+              >
                 <MenuItem
                   onClick={() => {
                     this.handleSendReminder();
@@ -185,7 +210,9 @@ class Dashboard extends Component {
                 >
                   Send Reminder
                 </MenuItem>
-                <MenuItem onClick={this.handleCancelInvoice}>Cancel Invoice</MenuItem>
+                <MenuItem onClick={this.handleCancelInvoice}>
+                  Cancel Invoice
+                </MenuItem>
               </Menu>
               <Snackbar
                 autoHideDuration={3000}
@@ -242,7 +269,7 @@ const TableContainer = styled.div`
 
 const MainContainer = styled.div`
   padding: 30px 80px;
-  height: auto;
+  height: 100%;
   background-color: ${props => props.theme.backgroundColor};
 `;
 
