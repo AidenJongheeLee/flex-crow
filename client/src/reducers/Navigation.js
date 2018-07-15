@@ -1,8 +1,8 @@
 import {
   CHANGE_TAB,
-  START_SUBMISSION,
-  SUBMISSION_SUCCESS,
-  SUBMISSION_ERROR,
+  START_REQUEST,
+  REQUEST_SUCCESS,
+  REQUEST_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -12,11 +12,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case START_SUBMISSION:
+    case START_REQUEST:
       return { ...state, loading: true };
-    case SUBMISSION_SUCCESS:
+    case REQUEST_SUCCESS:
       return { ...state, loading: false };
-    case SUBMISSION_ERROR:
+    case REQUEST_ERROR:
       return { ...state, loading: false };
     case CHANGE_TAB:
       return { ...state, currentTab: action.payload };

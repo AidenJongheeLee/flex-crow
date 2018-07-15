@@ -1,11 +1,11 @@
 import fetchResource from '../utils/fetchResource';
 import {
-  CHANGE_NAME,
+  SET_INVOICES,
   CHANGE_TAB,
   INVOICE_UPDATE,
-  START_SUBMISSION,
-  SUBMISSION_SUCCESS,
-  SUBMISSION_ERROR,
+  START_REQUEST,
+  REQUEST_SUCCESS,
+  REQUEST_ERROR,
 } from './types';
 
 export const changeTab = newTab => ({
@@ -13,24 +13,26 @@ export const changeTab = newTab => ({
   payload: newTab,
 });
 
-export const changeName = newName => ({
-  type: CHANGE_NAME,
+export const setInvoices = newName => ({
+  type: SET_INVOICES,
   payload: newName,
 });
 
-export const remoteChangeName = name => async (dispatch) => {
-  const newName = await fetchResource.get(name);
-  dispatch(changeName(newName));
+export const fetchInvoices = name => async (dispatch) => {
+  dispatch({ type: START_REQUEST });
+  const newName = await fetchResource.fetchInvoices(name);
+  dispatch({ type: REQUEST_SUCCESS });
+  dispatch(setInvoices(newName));
 };
 
 export const submitInvoice = invoiceData => async (dispatch) => {
-  dispatch({ type: START_SUBMISSION });
+  dispatch({ type: START_REQUEST });
   try {
     await fetchResource.submitInvoice(invoiceData);
-    dispatch({ type: SUBMISSION_SUCCESS });
+    dispatch({ type: REQUEST_SUCCESS });
   } catch (err) {
     console.log('err', err);
-    dispatch({ type: SUBMISSION_ERROR });
+    dispatch({ type: REQUEST_ERROR });
   }
 };
 

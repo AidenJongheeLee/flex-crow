@@ -1,6 +1,28 @@
-const getInvoices = async (name) => {
-  const data = await (await fetch('http://127.0.0.1:5000')).json();
-  return `${name} fetched: ${data.bob}`;
+import fakeReponses from './fakeResponses';
+
+const baseUrl = 'http://5d5eab99.ngrok.io';
+console.log('baseUrl');
+
+const fetchInvoices = async () => {
+  try {
+    const data = await (await fetch(`${baseUrl}/invoices`)).json();
+    console.log('index response', data);
+    return await Promise.resolve(fakeReponses.invoices);
+  } catch (error) {
+    console.log('Error while fetching invoices');
+    return error;
+  }
+};
+
+const cancelInvoice = async (id) => {
+  try {
+    const data = await (await fetch(`${baseUrl}/invoice/cancel${id}`)).json();
+    console.log('response from cancel', data);
+    return await Promise.resolve('Great Success');
+  } catch (error) {
+    console.log('Error while fetching invoices');
+    return error;
+  }
 };
 
 const submitInvoice = async (invoiceData) => {
@@ -21,7 +43,7 @@ const submitInvoice = async (invoiceData) => {
 };
 
 const exports = {
-  getInvoices,
+  fetchInvoices,
   submitInvoice,
 };
 

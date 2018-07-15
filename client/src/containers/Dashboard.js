@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { submitInvoice } from '../actions';
+import { submitInvoice, fetchInvoices } from '../actions';
 
 class Dashboard extends Component {
   static propTypes = {
-    invoices: object.isRequired,
     submitInvoice: func.isRequired,
     invoice: object.isRequired,
+    fetchInvoices: func.isRequired,
   };
+
+  componentDidMount() {
+    this.props.fetchInvoices();
+  }
 
   handleClick = () => {
     this.props.submitInvoice(this.props.invoice);
   };
   render() {
-    const { invoices } = this.props;
-    console.log(invoices);
     return (
       <MainContainer>
         <h2>Invoice Summary</h2>
-        <button onClick={this.handleClick}>Submit</button>
+        <button onClick={this.handleClick}>Test Action</button>
       </MainContainer>
     );
   }
@@ -37,5 +39,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { submitInvoice },
+  { submitInvoice, fetchInvoices },
 )(Dashboard);
