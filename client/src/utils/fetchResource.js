@@ -7,7 +7,7 @@ const fetchInvoices = async () => {
   try {
     const data = await (await fetch(`${baseUrl}/invoices`)).json();
     console.log('index response', data);
-    return await Promise.resolve(fakeReponses.invoices);
+    return await Promise.resolve(data);
   } catch (error) {
     console.log('Error while fetching invoices');
     return error;

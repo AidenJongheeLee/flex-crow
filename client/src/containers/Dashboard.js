@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { array, func, object } from 'prop-types';
+import { func, object } from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
@@ -23,7 +23,7 @@ class Dashboard extends Component {
     submitInvoice: func.isRequired,
     invoice: object.isRequired,
     fetchInvoices: func.isRequired,
-    invoices: array.isRequired,
+    invoices: object.isRequired,
   };
 
   state = {
@@ -39,7 +39,7 @@ class Dashboard extends Component {
 
   handleClick = () => {
     this.props.submitInvoice(this.props.invoice);
-  }
+  };
 
   handleClose = () => {
     this.setState({ anchorEl: null, selectedInvoice: {} });
@@ -83,7 +83,7 @@ class Dashboard extends Component {
     switch (invoice.status) {
       case 'paid':
         return theme.successColor;
-      case 'canceled':
+      case 'cancelled':
         return theme.errorColor;
       default:
         return theme.textColor;
@@ -93,6 +93,7 @@ class Dashboard extends Component {
   render() {
     const { invoices } = this.props;
     const { anchorEl, snackbarOpen, snackbarMsg } = this.state;
+    console.log(invoices);
     return (
       <MainContainer>
         <h2>Invoice Summary</h2>
@@ -108,19 +109,23 @@ class Dashboard extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {invoices.map(invoice => (
-              <TableRow key={invoice.id}>
-                <TableCell>{invoice.id}</TableCell>
-                <TableCell>{invoice.sender_name}</TableCell>
-                <TableCell>{invoice.total_cost}</TableCell>
-                <TableCell>
-                  <StatusLabel color={this.renderStatusColor(invoice)}>
-                    {_.upperCase(invoice.status)}
-                  </StatusLabel>
-                </TableCell>
-                <TableCell>{this.actionRequired(invoice)}</TableCell>
-              </TableRow>
-            ))}
+            {invoices.invoices ? (
+              invoices.invoices.map(invoice => (
+                <TableRow key={invoice.id}>
+                  <TableCell>{invoice.id}</TableCell>
+                  <TableCell>{invoice.sender_name}</TableCell>
+                  <TableCell>{invoice.total_cost}</TableCell>
+                  <TableCell>
+                    <StatusLabel color={this.renderStatusColor(invoice)}>
+                      {_.upperCase(invoice.status)}
+                    </StatusLabel>
+                  </TableCell>
+                  <TableCell>{this.actionRequired(invoice)}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <tr />
+            )}
           </TableBody>
         </Table>
 
