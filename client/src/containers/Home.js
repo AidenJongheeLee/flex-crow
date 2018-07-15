@@ -7,6 +7,7 @@ import Sidebar from './Sidebar';
 import CreateInvoiceContainer from './CreateInvoiceContainer';
 import TimeLogContainer from './TimeLogContainer';
 import CreateTimeLog from './CreateTimeLog';
+import MainDashboard from './MainDashboard';
 
 class Home extends Component {
   static propTypes = {
@@ -18,10 +19,11 @@ class Home extends Component {
     return (
       <MainContainer>
         <Sidebar />
-        {currentTab === 1 && <Dashboard />}
-        {currentTab === 2 && <CreateInvoiceContainer />}
-        {currentTab === 3 && <TimeLogContainer />}
-        {currentTab === 4 && <CreateTimeLog />}
+        {currentTab === 1 && <MainDashboard />}
+        {currentTab === 2 && <Dashboard />}
+        {currentTab === 3 && <CreateInvoiceContainer />}
+        {currentTab === 4 && <TimeLogContainer />}
+        {currentTab === 5 && <CreateTimeLog />}
       </MainContainer>
     );
   }

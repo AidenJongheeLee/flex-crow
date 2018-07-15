@@ -23,11 +23,11 @@ class Sidebar extends Component {
             <LogoIcon src={require('../images/flex-bill.png')} alt="logo" />
           </IconButton>
 
-          <IconButton onClick={() => this.handleClick(1)}>
+          <IconButton onClick={() => this.handleClick(2)}>
             <Receipt />
           </IconButton>
 
-          <IconButton onClick={() => this.handleClick(3)}>
+          <IconButton onClick={() => this.handleClick(4)}>
             <Schedule />
           </IconButton>
         </TopIconContainer>

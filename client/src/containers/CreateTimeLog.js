@@ -61,7 +61,7 @@ class CreateTimeLog extends Component {
         <ButtonContainer>
           <Button
             onClick={() => {
-              changeTab(3);
+              changeTab(4);
             }}
             variant="contained"
             color="primary"

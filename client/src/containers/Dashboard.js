@@ -120,7 +120,7 @@ class Dashboard extends Component {
               <h2>Invoice Summary</h2>
               <Button
                 onClick={() => {
-                  this.props.changeTab(2);
+                  this.props.changeTab(3);
                 }}
                 color="primary"
                 variant="contained"

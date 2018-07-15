@@ -63,7 +63,7 @@ class TimeLogContainer extends Component {
           color="primary"
           variant="contained"
           onClick={() => {
-            changeTab(4);
+            changeTab(5);
           }}
         >
           Create New Time Log
