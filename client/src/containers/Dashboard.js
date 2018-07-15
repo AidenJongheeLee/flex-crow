@@ -18,6 +18,7 @@ import {
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
 import { cancelInvoice, fetchInvoices } from '../actions';
+import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -29,9 +30,10 @@ class Dashboard extends Component {
 
   state = {
     anchorEl: null,
-    selectedInvoice: {},
+    selectedInvoice: '',
     snackbarOpen: false,
     snackbarMsg: '',
+    dashboardDialog: false,
   };
 
   componentDidMount() {
@@ -93,8 +95,7 @@ class Dashboard extends Component {
 
   render() {
     const { invoices, loading } = this.props;
-    const { anchorEl, snackbarOpen, snackbarMsg } = this.state;
-
+    const { anchorEl, snackbarOpen, snackbarMsg, dashboardDialog, selectedInvoice } = this.state;
     return (
       <MainContainer>
         {loading ? (
@@ -105,36 +106,53 @@ class Dashboard extends Component {
           <div>
             <h2>Invoice Summary</h2>
             <button onClick={this.handleClick}>Test Action</button>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Client Name</TableCell>
-                  <TableCell>Total Amount (ETH)</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {invoices.invoices ? (
-                  invoices.invoices.map(invoice => (
-                    <TableRow key={invoice.id}>
-                      <TableCell>{invoice.id}</TableCell>
-                      <TableCell>{invoice.sender_name}</TableCell>
-                      <TableCell>{invoice.total_cost}</TableCell>
-                      <TableCell>
-                        <StatusLabel color={this.renderStatusColor(invoice)}>
-                          {_.upperCase(invoice.status)}
-                        </StatusLabel>
-                      </TableCell>
-                      <TableCell>{this.actionRequired(invoice)}</TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <tr />
-                )}
-              </TableBody>
-            </Table>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Client Name</TableCell>
+                    <TableCell>Total Amount (ETH)</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {invoices && invoices.invoices && invoices.invoices.length > 0 ? (
+                    invoices.invoices.map(invoice => (
+                      <TableRow
+                        key={invoice.id}
+                        onClick={() => {
+                          this.setState({ selectedInvoice: invoice, dashboardDialog: true });
+                        }}
+                      >
+                        <TableCell>{invoice.id}</TableCell>
+                        <TableCell>{invoice.sender_name}</TableCell>
+                        <TableCell>{invoice.total_cost}</TableCell>
+                        <TableCell>
+                          <StatusLabel color={this.renderStatusColor(invoice)}>
+                            {_.upperCase(invoice.status)}
+                          </StatusLabel>
+                        </TableCell>
+                        <TableCell>{this.actionRequired(invoice)}</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <tr />
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+            {selectedInvoice && (
+              <DashboardDialog
+                selectedInvoice={selectedInvoice}
+                open={dashboardDialog}
+                onClose={() => {
+                  this.setState({ dashboardDialog: false, selectedInvoice: '' });
+                }}
+              />
+            )}
 
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
               <MenuItem
@@ -180,8 +198,23 @@ const StatusLabel = styled.p`
   color: ${props => (props.color ? props.color : props.theme.textColor)};
 `;
 
+const TableContainer = styled.div`
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  width: 80%;
+  margin: auto;
+  padding: 24pt;
+  width: 100%;
+  background-color: ${props => props.theme.wBackgroundColor};
+`;
+
 const MainContainer = styled.div`
-  padding: 30px;
+  padding: 30px 80px;
+  height: 100%;
+  background-color: ${props => props.theme.backgroundColor};
 `;
 
 const mapStateToProps = state => ({

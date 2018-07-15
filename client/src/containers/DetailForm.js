@@ -24,7 +24,6 @@ class DetailForm extends Component {
     const { handleNext, handleBack, invoice, classes } = this.props;
     return (
       <div>
-        <h2>Create New Invoice</h2>
         <DetailContainer>
           <MainWrapper>
             <DetailText>Details of the service includes...</DetailText>
@@ -88,6 +87,7 @@ const DetailContainer = styled.div`
   width: 80%;
   margin: auto;
   padding: 24pt;
+  background-color: ${props => props.theme.wBackgroundColor};
 `;
 
 const ButtonContainer = styled.div`

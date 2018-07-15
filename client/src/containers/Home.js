@@ -25,6 +25,7 @@ class Home extends Component {
 
 const MainContainer = styled.div`
   margin-left: 80px;
+  height: 100%;
 `;
 
 const mapStatetoProps = state => ({

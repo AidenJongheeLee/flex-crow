@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Tooltip } from '@material-ui/core';
 
 import { changeTab } from '../actions';
 
@@ -22,9 +23,11 @@ class Sidebar extends Component {
           <IconButton onClick={() => this.handleClick(1)}>
             <LogoIcon src={require('../images/flex-bill.png')} alt="logo" />
           </IconButton>
-          <IconButton onClick={() => this.handleClick(2)}>
-            <AddBox />
-          </IconButton>
+          <Tooltip title="Create New Invoice">
+            <IconButton onClick={() => this.handleClick(2)}>
+              <AddBox />
+            </IconButton>
+          </Tooltip>
         </TopIconContainer>
         <BottomIcon>
           <IconButton onClick={() => this.handleClick(3)}>
@@ -56,13 +59,13 @@ const LogoIcon = styled.img`
 `;
 
 const SidebarContainer = styled.div`
+  background-color: ${props => props.theme.successColor};
   height: 100%;
   width: 80px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   overflow-x: hidden;
   display: flex;

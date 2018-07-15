@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { TextField, Button, InputAdornment } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { submitInvoice } from '../actions';
+import SummaryForm from './SummaryForm';
 
 class InvoiceSummary extends Component {
   static propTypes = {
@@ -12,7 +13,6 @@ class InvoiceSummary extends Component {
     classes: object.isRequired,
     handleBack: func.isRequired,
     submitInvoice: func.isRequired,
-    user: object.isRequired,
   };
 
   handleClick = () => {
@@ -20,66 +20,12 @@ class InvoiceSummary extends Component {
   };
 
   render() {
-    const { invoice, classes, handleBack, user } = this.props;
-
+    const { classes, handleBack, invoice } = this.props;
     return (
       <div>
-        <h2>Create New Invoice</h2>
         <InvoiceContainer>
           <SummaryWrapper>
-            <InvoiceHeader>Invoice#</InvoiceHeader>
-            <TopContainer>
-              <TextLabel>From</TextLabel>
-              <TextLabel last>To</TextLabel>
-            </TopContainer>
-            <TopContainer>
-              <TextField className={classes.spacingTop} fullWidth disabled value={user.name} />
-              <TextField
-                fullWidth
-                className={classes.spacingLeft}
-                disabled
-                value={invoice.sender_name}
-              />
-            </TopContainer>
-            <TopContainer>
-              <TextField className={classes.spacingTop} fullWidth disabled value={user.email} />
-              <TextField
-                fullWidth
-                className={classes.spacingLeft}
-                disabled
-                value={invoice.to_email}
-              />
-            </TopContainer>
-            <TextField
-              className={classes.spacingTop}
-              fullWidth
-              disabled
-              label="Project Name"
-              value={invoice.project_name}
-            />
-            <TextField
-              className={classes.spacingTop}
-              fullWidth
-              disabled
-              label="Service Detail"
-              value={invoice.description}
-            />
-            <TextField
-              className={classes.spacingTop}
-              fullWidth
-              disabled
-              label="Billing Frequency"
-              value={invoice.invoice_type}
-            />
-            <TextField
-              className={classes.spacingTop}
-              disabled
-              label="Total cost"
-              value={invoice.total_cost}
-              InputProps={{
-                endAdornment: <InputAdornment>ETH </InputAdornment>,
-              }}
-            />
+            <SummaryForm invoice={invoice} />
           </SummaryWrapper>
         </InvoiceContainer>
 
@@ -120,14 +66,6 @@ const styles = {
   },
 };
 
-const TextLabel = styled.p`
-  font-size: 1rem;
-  flex: 1;
-  color: rgba(0, 0, 0, 0.54);
-  margin-bottom: 0px;
-  margin-left: ${props => (props.last ? '48pt' : '0pt')};
-`;
-
 const SummaryWrapper = styled.div`
   width: 50%;
   margin: auto;
@@ -141,12 +79,6 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const TopContainer = styled.div`
-  display: flex;
-`;
-
-const InvoiceHeader = styled.h4``;
-
 const InvoiceContainer = styled.div`
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   box-sizing: border-box;
@@ -156,6 +88,7 @@ const InvoiceContainer = styled.div`
   width: 80%;
   margin: auto;
   padding: 24pt;
+  background-color: ${props => props.theme.wBackgroundColor};
 `;
 
 const mapStateToProps = state => ({

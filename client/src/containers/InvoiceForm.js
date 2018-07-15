@@ -33,7 +33,6 @@ class InvoiceForm extends Component {
     const { classes, handleNext, invoice } = this.props;
     return (
       <div>
-        <h2>Create New Invoice</h2>
         <FormContainer>
           <FormWrapper>
             <InvoiceText marginBottom="4pt">This invoice is billed to...</InvoiceText>
@@ -127,6 +126,7 @@ const FormContainer = styled.div`
   width: 80%;
   margin: auto;
   padding: 24pt;
+  background-color: ${props => props.theme.wBackgroundColor};
 `;
 
 const FormWrapper = styled.div`

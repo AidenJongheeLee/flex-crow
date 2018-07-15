@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import { object } from 'prop-types';
 import styled from 'styled-components';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
+import { withStyles } from '@material-ui/core/styles';
 import StepLabel from '@material-ui/core/StepLabel';
+import { theme } from '../styles/Theme';
 import InvoiceForm from './InvoiceForm';
 import DetailForm from './DetailForm';
 import InvoiceSummary from './InvoiceSummary';
 
 class CreateInvoiceContainer extends Component {
+  static propTypes = {
+    classes: object.isRequired,
+  };
+
   state = {
     activeStep: 0,
   };
@@ -23,14 +30,16 @@ class CreateInvoiceContainer extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { activeStep } = this.state;
     const steps = ['General', 'Details', 'Send'];
     return (
       <MainContainer>
-        <Stepper activeStep={activeStep}>
-          {steps.map(step => (
+        <HeaderText>Create New Invoice</HeaderText>
+        <Stepper classes={{ root: classes.stepper }} activeStep={activeStep}>
+          {steps.map((step, index) => (
             <Step key={step}>
-              <StepLabel>{step}</StepLabel>
+              <StepLabel classes={{ active: classes.stepperIcon }}>{step}</StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -44,8 +53,26 @@ class CreateInvoiceContainer extends Component {
   }
 }
 
-const MainContainer = styled.div`
-  padding: 30px;
+const styles = {
+  stepper: {
+    width: '80%',
+    margin: 'auto',
+    backgroundColor: theme.backgroundColor,
+  },
+  stepperIcon: {
+    color: 'red',
+  },
+};
+
+const HeaderText = styled.h2`
+  width: 80%;
+  margin: auto;
 `;
 
-export default CreateInvoiceContainer;
+const MainContainer = styled.div`
+  padding: 30px;
+  background-color: ${props => props.theme.backgroundColor};
+  height: 100%;
+`;
+
+export default withStyles(styles)(CreateInvoiceContainer);

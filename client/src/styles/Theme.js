@@ -3,4 +3,7 @@ exports.theme = {
   successColor: '#48a999',
   errorColor: '#f44336',
   textColor: '#000000',
+  primaryColor: '#00796b',
+  backgroundColor: '#f5f5f5',
+  wBackgroundColor: '#ffffff',
 };

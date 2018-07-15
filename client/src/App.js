@@ -17,6 +17,19 @@ const muiTheme = createMuiTheme({
     fontFamily: "'Nunito Sans', sans-serif",
     fontWeight: 300,
   },
+  overrides: {
+    MuiButton: {
+      flatPrimary: {
+        color: theme.successColor,
+      },
+      raisedPrimary: {
+        '&:hover': {
+          backgroundColor: theme.successColor,
+        },
+        backgroundColor: theme.successColor,
+      },
+    },
+  },
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
