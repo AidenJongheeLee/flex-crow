@@ -3,13 +3,7 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Table,
-  TableRow,
-  TableCell,
-  TableHead,
-  TableBody,
-} from '@material-ui/core';
+import { Table, TableRow, TableCell, TableHead, TableBody } from '@material-ui/core';
 import { theme } from '../styles/Theme';
 import { fetchInvoices } from '../actions';
 
@@ -173,7 +167,6 @@ const InvoiceTableWrapper = styled.div`
 
 const MainContainer = styled.div`
   padding: 30px 80px;
-  height: 100%;
   background-color: ${props => props.theme.backgroundColor};
 `;
 
