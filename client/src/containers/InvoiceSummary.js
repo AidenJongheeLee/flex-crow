@@ -4,14 +4,20 @@ import { withStyles } from '@material-ui/core/styles';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, Button, InputAdornment } from '@material-ui/core';
+import { submitInvoice } from '../actions';
 
 class InvoiceSummary extends Component {
   static propTypes = {
     invoice: object.isRequired,
     classes: object.isRequired,
     handleBack: func.isRequired,
+    submitInvoice: func.isRequired,
     user: object.isRequired,
   };
+
+  handleClick = () => {
+    this.props.submitInvoice(this.props.invoice);
+  }
 
   render() {
     const { invoice, classes, handleBack, user } = this.props;
@@ -68,6 +74,10 @@ class InvoiceSummary extends Component {
         </InvoiceContainer>
 
         <ButtonContainer>
+          <Button className={classes.buttons} color="primary" onClick={this.handleClick}>
+            Send Invoice
+          </Button>
+
           <Button
             className={classes.buttons}
             onClick={() => {
@@ -145,6 +155,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    {},
+    { submitInvoice },
   )(InvoiceSummary),
 );

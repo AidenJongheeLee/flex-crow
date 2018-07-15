@@ -26,6 +26,12 @@ app.get('/test', (request, response) => {
   return 'Test';
 });
 
+app.post('/', (request, response) => {
+  console.log('request', request);
+  response.send(JSON.stringify({ bob: "dole" }));
+  return 'Test';
+});
+
 app.get('/', (request, response) => {
   response.send(JSON.stringify({ bob: "dole" }));
   return 'Test';

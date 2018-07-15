@@ -1,19 +1,28 @@
-// const get = async (string) => {
-//   const res = await fetch('http://127.0.0.1:')
-//   let dara = await res.json();
-//   console.log('res', res);
-//   return Promise.resolve(`fetched: ${string}`);
-// };
-
-async function get(name) {
+const getInvoices = async (name) => {
   const data = await (await fetch('http://127.0.0.1:5000')).json();
-  return Promise.resolve(`${name} fetched: ${data.bob}`);
-}
+  return `${name} fetched: ${data.bob}`;
+};
 
-// Promise.resolve(`fetched: ${string}`);
+const submitInvoice = async (invoiceData) => {
+  try {
+    const wasPostSuccessFul = await fetch('http://127.0.0.1:5000', {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(invoiceData), // data can be `string` or {object}!
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return wasPostSuccessFul.json();
+  } catch (error) {
+    console.log('there was an error when submitting');
+    console.log(error);
+    return error;
+  }
+};
 
 const exports = {
-  get,
+  getInvoices,
+  submitInvoice,
 };
 
 export default exports;
