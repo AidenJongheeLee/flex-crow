@@ -1,7 +1,4 @@
-import fakeReponses from './fakeResponses';
-
 const baseUrl = 'http://5d5eab99.ngrok.io';
-console.log('baseUrl');
 
 const fetchInvoices = async () => {
   try {
@@ -16,7 +13,12 @@ const fetchInvoices = async () => {
 
 const cancelInvoice = async (id) => {
   try {
-    const data = await (await fetch(`${baseUrl}/invoice/cancel${id}`)).json();
+    const data = await (await fetch(`${baseUrl}/invoice/cancel/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })).json();
     console.log('response from cancel', data);
     return await Promise.resolve('Great Success');
   } catch (error) {
@@ -27,9 +29,9 @@ const cancelInvoice = async (id) => {
 
 const submitInvoice = async (invoiceData) => {
   try {
-    const wasPostSuccessFul = await fetch('http://127.0.0.1:5000', {
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(invoiceData), // data can be `string` or {object}!
+    const wasPostSuccessFul = await fetch(`${baseUrl}/invoices`, {
+      method: 'POST',
+      body: JSON.stringify(invoiceData),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -45,6 +47,7 @@ const submitInvoice = async (invoiceData) => {
 const exports = {
   fetchInvoices,
   submitInvoice,
+  cancelInvoice,
 };
 
 export default exports;
