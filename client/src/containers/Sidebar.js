@@ -8,7 +8,6 @@ import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Tooltip } from '@material-ui/core';
-
 import { changeTab } from '../actions';
 
 class Sidebar extends Component {
@@ -25,7 +24,7 @@ class Sidebar extends Component {
           </IconButton>
           <Tooltip title="Create New Invoice">
             <IconButton onClick={() => this.handleClick(2)}>
-              <AddBox />
+              <AddBox color="primary" />
             </IconButton>
           </Tooltip>
         </TopIconContainer>

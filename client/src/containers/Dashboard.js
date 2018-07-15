@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 import { func, object, bool } from 'prop-types';
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ import {
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { cancelInvoice, fetchInvoices, submitPayment } from '../actions';
+import { fetchInvoices, submitPayment } from '../actions';
 import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
@@ -26,6 +27,7 @@ class Dashboard extends Component {
     fetchInvoices: func.isRequired,
     invoices: object.isRequired,
     loading: bool.isRequired,
+    classes: object.isRequired,
   };
 
   state = {
@@ -65,12 +67,18 @@ class Dashboard extends Component {
   };
 
   actionRequired = (invoice) => {
+    const { classes } = this.props;
     switch (invoice.status) {
       case 'unpaid':
         return (
           <IconButton
+            className={classes.iconButton}
             onClick={(e) => {
-              this.setState({ anchorEl: e.currentTarget, selectedInvoice: invoice });
+              e.stopPropagation();
+              this.setState({
+                anchorEl: e.currentTarget,
+                selectedInvoice: invoice,
+              });
             }}
           >
             <MoreVert />
@@ -94,7 +102,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { invoices, loading } = this.props;
+    const { invoices, loading, classes } = this.props;
     const { anchorEl, snackbarOpen, snackbarMsg, dashboardDialog, selectedInvoice } = this.state;
     return (
       <MainContainer>
@@ -121,8 +129,11 @@ class Dashboard extends Component {
                   {invoices && invoices.invoices && invoices.invoices.length > 0 ? (
                     invoices.invoices.map(invoice => (
                       <TableRow
+                        hover
+                        className={classes.tableRow}
                         key={invoice.id}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           this.setState({ selectedInvoice: invoice, dashboardDialog: true });
                         }}
                       >
@@ -187,6 +198,15 @@ class Dashboard extends Component {
   }
 }
 
+const styles = {
+  iconButton: {
+    zIndex: 3,
+  },
+  tableRow: {
+    cursor: 'pointer',
+  },
+};
+
 const LoadingContainer = styled.div`
   height: 500px;
   display: flex;
@@ -223,7 +243,9 @@ const mapStateToProps = state => ({
   loading: state.navigation.loading,
 });
 
-export default connect(
-  mapStateToProps,
-  { submitPayment, fetchInvoices },
-)(Dashboard);
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    { submitPayment, fetchInvoices },
+  )(Dashboard),
+);

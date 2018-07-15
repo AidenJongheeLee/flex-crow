@@ -1,4 +1,6 @@
-const baseUrl = 'http://5d5eab99.ngrok.io';
+import { invoices } from './fakeResponses';
+
+const baseUrl = 'https://a5c9c29c.ngrok.io';
 
 const fetchInvoices = async () => {
   try {
@@ -6,7 +8,7 @@ const fetchInvoices = async () => {
     console.log('index response', data);
     return await Promise.resolve(data);
   } catch (error) {
-    console.log('Error while fetching invoices');
+    console.log('Error while fetching invoices', error);
     return error;
   }
 };
