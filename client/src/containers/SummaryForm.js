@@ -22,6 +22,7 @@ class InvoiceSummary extends Component {
 
   render() {
     const { invoice, classes, user, dashboard } = this.props;
+    const totalCost = dashboard ? invoice.total_cost / 100 : invoice.total_cost;
     return (
       <div>
         <InvoiceHeader>Invoice#</InvoiceHeader>
@@ -93,7 +94,7 @@ class InvoiceSummary extends Component {
           className={classes.spacingTop}
           disabled
           label="Total cost"
-          value={invoice.total_cost || ''}
+          value={totalCost || ''}
           InputProps={{
             endAdornment: <InputAdornment>ETH </InputAdornment>,
           }}

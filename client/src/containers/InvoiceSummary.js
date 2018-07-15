@@ -16,7 +16,13 @@ class InvoiceSummary extends Component {
   };
 
   handleClick = () => {
-    this.props.submitInvoice(this.props.invoice);
+    const { invoice } = this.props;
+    const invoiceData = {
+      ...invoice,
+      total_cost: invoice.total_cost * 100,
+    };
+
+    this.props.submitInvoice(invoiceData);
   };
 
   render() {

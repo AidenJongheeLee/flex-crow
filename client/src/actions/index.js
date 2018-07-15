@@ -21,23 +21,23 @@ export const setInvoices = newName => ({
 
 export const fetchInvoices = () => async (dispatch) => {
   dispatch({ type: START_REQUEST });
-  const newName = await fetchResource.fetchInvoices();
+  const invoices = await fetchResource.fetchInvoices();
   dispatch({ type: REQUEST_SUCCESS });
-  dispatch(setInvoices(newName));
+  dispatch(setInvoices(invoices));
 };
 
 export const cancelInvoice = id => async (dispatch) => {
   dispatch({ type: START_REQUEST });
   await fetchResource.cancelInvoice(id);
+  const invoices = await fetchResource.fetchInvoices();
+  dispatch(setInvoices(invoices));
   dispatch({ type: REQUEST_SUCCESS });
-  fetchInvoices();
 };
 
 export const fetchInvoicePayments = id => async (dispatch) => {
   dispatch({ type: START_REQUEST });
   await fetchResource.fetchInvoicePayments(id);
   dispatch({ type: REQUEST_SUCCESS });
-  fetchInvoices();
 };
 
 export const submitInvoice = invoiceData => async (dispatch) => {
