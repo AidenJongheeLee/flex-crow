@@ -18,11 +18,18 @@ export const setInvoices = newName => ({
   payload: newName,
 });
 
-export const fetchInvoices = name => async (dispatch) => {
+export const fetchInvoices = () => async (dispatch) => {
   dispatch({ type: START_REQUEST });
-  const newName = await fetchResource.fetchInvoices(name);
+  const newName = await fetchResource.fetchInvoices();
   dispatch({ type: REQUEST_SUCCESS });
   dispatch(setInvoices(newName));
+};
+
+export const cancelInvoice = id => async (dispatch) => {
+  dispatch({ type: START_REQUEST });
+  await fetchResource.cancelInvoice(id);
+  dispatch({ type: REQUEST_SUCCESS });
+  fetchInvoices();
 };
 
 export const submitInvoice = invoiceData => async (dispatch) => {
