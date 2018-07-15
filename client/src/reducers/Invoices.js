@@ -1,37 +1,38 @@
-const initialState = {
-  invoices: [
-    {
-      id: 1,
-      name: 'Jonny',
-      email: 'test@test.com',
-      projectName: 'Flex Ride',
-      billingFrequency: 'one-time',
-      serviceDetail: 'Flex Ride Flex Ride Flex Ride',
-      price: 100,
-      status: 'paid',
-    },
-    {
-      id: 2,
-      name: 'Jame',
-      email: 'test1@test.com',
-      projectName: 'Flex Crow',
-      billingFrequency: 'one-time',
-      serviceDetail: 'Flex Crow Flex Crow Flex Crow',
-      price: 100,
-      status: 'unpaid',
-    },
-    {
-      id: 3,
-      name: 'Gloria',
-      email: 'test2@test.com',
-      projectName: 'Flex Chain',
-      billingFrequency: 'one-time',
-      serviceDetail: 'Flex Chain Flex Chain Flex Chain',
-      price: 100,
-      status: 'cancel',
-    },
-  ],
-};
+const initialState = [
+  {
+    user_id: 1,
+    id: 1,
+    sender_name: 'Jonny',
+    to_email: 'test@test.com',
+    project_name: 'Flex Ride',
+    invoice_type: 'one-time',
+    description: 'Flex Ride Flex Ride Flex Ride',
+    total_cost: 100,
+    status: 'paid',
+  },
+  {
+    user_id: 1,
+    id: 2,
+    sender_name: 'James',
+    to_email: 'test1@test.com',
+    project_name: 'Flex Crow',
+    invoice_type: 'one-time',
+    description: 'Flex Crow Flex Crow Flex Crow',
+    total_cost: 100,
+    status: 'unpaid',
+  },
+  {
+    user_id: 1,
+    id: 3,
+    sender_name: 'Gloria',
+    to_email: 'test2@test.com',
+    project_name: 'Flex Chain',
+    invoice_type: 'one-time',
+    description: 'Flex Chain Flex Chain Flex Chain',
+    total_cost: 100,
+    status: 'canceled',
+  },
+];
 
 export default (state = initialState, action) => {
   switch (action.type) {

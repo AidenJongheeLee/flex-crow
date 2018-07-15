@@ -20,7 +20,7 @@ class Sidebar extends Component {
       <SidebarContainer className="side-nav">
         <TopIconContainer>
           <IconButton onClick={() => this.handleClick(1)}>
-            <LogoIcon src={require('../images/flexride-logo-320.png')} alt="logo" />
+            <LogoIcon src={require('../images/flex-bill.png')} alt="logo" />
           </IconButton>
           <IconButton onClick={() => this.handleClick(2)}>
             <AddBox />
