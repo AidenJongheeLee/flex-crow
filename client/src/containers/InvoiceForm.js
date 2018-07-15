@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { object, func } from 'prop-types';
+import { object, func, array } from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { TextField, FormControl, InputLabel, MenuItem, Select, Button } from '@material-ui/core';
@@ -12,6 +12,7 @@ class InvoiceForm extends Component {
     handleNext: func.isRequired,
     invoice: object.isRequired,
     updateInvoice: func.isRequired,
+    clients: array.isRequired,
   };
 
   handleChangeField = (value, field) => {
@@ -20,9 +21,12 @@ class InvoiceForm extends Component {
   };
 
   handleSelectClient = (value) => {
-    const { updateInvoice } = this.props;
+    const { updateInvoice, clients } = this.props;
     if (value !== 'create') {
+      const selectedClient = clients.find(client => client.id === value);
       updateInvoice({ field: 'selectedClient', value });
+      updateInvoice({ field: 'sender_name', value: selectedClient.name });
+      updateInvoice({ field: 'to_email', value: selectedClient.email });
     } else {
       updateInvoice({ field: 'newClient', value: true });
       updateInvoice({ field: 'selectedClient', value: 'create' });
@@ -30,7 +34,8 @@ class InvoiceForm extends Component {
   };
 
   render() {
-    const { classes, handleNext, invoice } = this.props;
+    console.log('clients:', this.props.clients);
+    const { classes, handleNext, invoice, clients } = this.props;
     return (
       <div>
         <FormContainer>
@@ -45,6 +50,11 @@ class InvoiceForm extends Component {
                   this.handleSelectClient(e.target.value);
                 }}
               >
+                {
+                  clients.map(client =>
+                    <MenuItem key={client.id} value={client.id}>{client.name}</MenuItem>,
+                  )
+                }
                 <MenuItem value="create">Add New Client</MenuItem>
               </Select>
             </FormControl>
@@ -157,6 +167,7 @@ const styles = {
 
 const mapStatetoProps = state => ({
   invoice: state.invoice,
+  clients: state.clients,
 });
 
 export default connect(

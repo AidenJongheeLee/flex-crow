@@ -19,13 +19,14 @@ import {
 } from '@material-ui/core';
 import MoreVert from '@material-ui/icons/MoreVert';
 import { theme } from '../styles/Theme';
-import { fetchInvoices, submitPayment, changeTab } from '../actions';
+import { submitPayment, fetchInvoices, cancelInvoice, changeTab } from '../actions';
 import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
   static propTypes = {
     submitPayment: func.isRequired,
     fetchInvoices: func.isRequired,
+    cancelInvoice: func.isRequired,
     invoices: object.isRequired,
     loading: bool.isRequired,
     classes: object.isRequired,
@@ -58,6 +59,7 @@ class Dashboard extends Component {
 
   handleCancelInvoice = () => {
     // todo: cancel invoice
+    this.props.cancelInvoice(this.state.selectedInvoice.id);
     this.setState({ snackbarOpen: true, snackbarMsg: 'Canceled Invoice' });
     this.handleClose();
   };
@@ -183,13 +185,7 @@ class Dashboard extends Component {
               >
                 Send Reminder
               </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  this.handleCancelInvoice();
-                }}
-              >
-                Cancel Invoice
-              </MenuItem>
+              <MenuItem onClick={this.handleCancelInvoice}>Cancel Invoice</MenuItem>
             </Menu>
             <Snackbar
               autoHideDuration={3000}
@@ -257,6 +253,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { submitPayment, fetchInvoices, changeTab },
+    { submitPayment, fetchInvoices, cancelInvoice, changeTab },
   )(Dashboard),
 );

@@ -4,6 +4,7 @@ import NavigationReducer from './Navigation';
 import InvoiceReducer from './Invoice';
 import InvoicesReducer from './Invoices';
 import TimeLogsReducer from './TimeLogs';
+import Clients from './Clients';
 
 export default combineReducers({
   user: UserReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   invoice: InvoiceReducer,
   invoices: InvoicesReducer,
   timeLogs: TimeLogsReducer,
+  clients: Clients,
 });
