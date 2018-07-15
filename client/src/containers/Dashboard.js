@@ -22,7 +22,7 @@ import DashboardDialog from './DashboardDialog';
 
 class Dashboard extends Component {
   static propTypes = {
-    cancelInvoice: func.isRequired,
+    submitPayment: func.isRequired,
     fetchInvoices: func.isRequired,
     invoices: object.isRequired,
     loading: bool.isRequired,
@@ -41,7 +41,7 @@ class Dashboard extends Component {
   }
 
   handleClick = () => {
-    this.props.cancelInvoice(3);
+    this.props.submitPayment(3, 99);
   };
 
   handleClose = () => {
@@ -225,5 +225,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { cancelInvoice, fetchInvoices },
+  { submitPayment, fetchInvoices },
 )(Dashboard);

@@ -32,10 +32,28 @@ export const cancelInvoice = id => async (dispatch) => {
   fetchInvoices();
 };
 
+export const fetchInvoicePayments = id => async (dispatch) => {
+  dispatch({ type: START_REQUEST });
+  await fetchResource.fetchInvoicePayments(id);
+  dispatch({ type: REQUEST_SUCCESS });
+  fetchInvoices();
+};
+
 export const submitInvoice = invoiceData => async (dispatch) => {
   dispatch({ type: START_REQUEST });
   try {
     await fetchResource.submitInvoice(invoiceData);
+    dispatch({ type: REQUEST_SUCCESS });
+  } catch (err) {
+    console.log('err', err);
+    dispatch({ type: REQUEST_ERROR });
+  }
+};
+
+export const submitPayment = (invoiceId, amount) => async (dispatch) => {
+  dispatch({ type: START_REQUEST });
+  try {
+    await fetchResource.submitPayment(invoiceId, amount);
     dispatch({ type: REQUEST_SUCCESS });
   } catch (err) {
     console.log('err', err);
