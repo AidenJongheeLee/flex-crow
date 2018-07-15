@@ -44,6 +44,7 @@ export const submitInvoice = invoiceData => async (dispatch) => {
   try {
     await fetchResource.submitInvoice(invoiceData);
     dispatch({ type: REQUEST_SUCCESS });
+    window.location.reload();
   } catch (err) {
     console.log('err', err);
     dispatch({ type: REQUEST_ERROR });

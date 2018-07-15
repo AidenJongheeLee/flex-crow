@@ -33,13 +33,14 @@ class CreateInvoiceContainer extends Component {
     const { classes } = this.props;
     const { activeStep } = this.state;
     const steps = ['General', 'Details', 'Send'];
+
     return (
       <MainContainer>
         <HeaderText>Create New Invoice</HeaderText>
         <Stepper classes={{ root: classes.stepper }} activeStep={activeStep}>
-          {steps.map((step, index) => (
+          {steps.map(step => (
             <Step key={step}>
-              <StepLabel classes={{ active: classes.stepperIcon }}>{step}</StepLabel>
+              <StepLabel>{step}</StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -60,7 +61,7 @@ const styles = {
     backgroundColor: theme.backgroundColor,
   },
   stepperIcon: {
-    color: 'red',
+    color: `${theme.primaryColor} !important`,
   },
 };
 

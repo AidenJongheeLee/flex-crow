@@ -28,44 +28,49 @@ class InvoiceSummary extends Component {
           <TextLabel last>To</TextLabel>
         </TopContainer>
         <TopContainer>
-          <TextField className={classes.spacingTop} fullWidth disabled value={user.name} />
+          <TextField className={classes.spacingTop} fullWidth disabled value={user.name || ''} />
           <TextField
             fullWidth
             className={classes.spacingLeft}
             disabled
-            value={invoice.sender_name}
+            value={invoice.sender_name || ''}
           />
         </TopContainer>
         <TopContainer>
-          <TextField className={classes.spacingTop} fullWidth disabled value={user.email} />
-          <TextField fullWidth className={classes.spacingLeft} disabled value={invoice.to_email} />
+          <TextField className={classes.spacingTop} fullWidth disabled value={user.email || ''} />
+          <TextField
+            fullWidth
+            className={classes.spacingLeft}
+            disabled
+            value={invoice.to_email || ''}
+          />
         </TopContainer>
         <TextField
           className={classes.spacingTop}
           fullWidth
           disabled
           label="Project Name"
-          value={invoice.project_name}
+          value={invoice.project_name || ''}
         />
         <TextField
           className={classes.spacingTop}
           fullWidth
           disabled
           label="Service Detail"
-          value={invoice.description}
+          value={invoice.description || ''}
         />
         <TextField
           className={classes.spacingTop}
           fullWidth
           disabled
           label="Billing Frequency"
-          value={invoice.invoice_type}
+          value={invoice.invoice_type || ''}
         />
         <TextField
           className={classes.spacingTop}
           disabled
           label="Total cost"
-          value={invoice.total_cost}
+          value={invoice.total_cost || ''}
           InputProps={{
             endAdornment: <InputAdornment>ETH </InputAdornment>,
           }}
