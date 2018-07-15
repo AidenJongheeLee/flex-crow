@@ -3,7 +3,13 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
-import { Table, TableRow, TableCell, TableHead, TableBody } from '@material-ui/core';
+import {
+  Table,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableBody,
+} from '@material-ui/core';
 import { theme } from '../styles/Theme';
 import { fetchInvoices } from '../actions';
 
@@ -49,7 +55,7 @@ class MainDashboard extends Component {
                   timeLogs.timeLogs.map(timelog => (
                     <TableRow key={timelog.id}>
                       <TableCell>{timelog.project_name}</TableCell>
-                      <TableCell>{timelog.duration}</TableCell>
+                      <TableCell>{timelog.duration} hours</TableCell>
                       <TableCell>{timelog.created_at}</TableCell>
                     </TableRow>
                   ))}
@@ -81,11 +87,14 @@ class MainDashboard extends Component {
                       key={invoice.id}
                       onClick={(e) => {
                         e.stopPropagation();
-                        this.setState({ selectedInvoice: invoice, dashboardDialog: true });
+                        this.setState({
+                          selectedInvoice: invoice,
+                          dashboardDialog: true,
+                        });
                       }}
                     >
                       <TableCell>{invoice.sender_name}</TableCell>
-                      <TableCell>{invoice.total_cost / 100}</TableCell>
+                      <TableCell>{invoice.total_cost / 100} ETH</TableCell>
                       <TableCell>
                         <StatusLabel color={this.renderStatusColor(invoice)}>
                           {_.upperCase(invoice.status)}
