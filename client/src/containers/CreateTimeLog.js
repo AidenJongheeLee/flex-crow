@@ -4,19 +4,26 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { TextField, InputAdornment, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { updateInvoice, changeTab } from '../actions';
+import { updateInvoice, changeTab, createTimelog } from '../actions';
 
 class CreateTimeLog extends Component {
   static propTypes = {
     timeLog: object.isRequired,
     classes: object.isRequired,
-    updateInvoice: func.isRequired,
     changeTab: func.isRequired,
+    updateInvoice: func.isRequired,
+    createTimelog: func.isRequired,
+  };
+
+  handleCreateTimeLog = () => {
+    const { changeTab, timeLog, createTimelog } = this.props;
+    timeLog.created_at = 'Jul 15th';
+    createTimelog(timeLog);
+    changeTab(4);
   };
 
   render() {
-    const { timeLog, classes, updateInvoice, changeTab } = this.props;
-    console.log(timeLog);
+    const { timeLog, classes, updateInvoice } = this.props;
 
     return (
       <MainContainer>
@@ -61,7 +68,7 @@ class CreateTimeLog extends Component {
         <ButtonContainer>
           <Button
             onClick={() => {
-              changeTab(4);
+              this.handleCreateTimeLog();
             }}
             variant="contained"
             color="primary"
@@ -122,6 +129,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { updateInvoice, changeTab },
+    { updateInvoice, changeTab, createTimelog },
   )(CreateTimeLog),
 );

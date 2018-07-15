@@ -1,6 +1,6 @@
 import { LOAD_CLIENTS } from '../actions/types';
 
-const INITIAL_STATE = [{ id: '1', name: 'James', email: 'james@project.jameskropp.com' }];
+const INITIAL_STATE = [{ id: '1', name: 'James Kropp', email: 'james@project.jameskropp.com' }];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

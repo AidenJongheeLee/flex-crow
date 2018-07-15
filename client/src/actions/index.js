@@ -7,6 +7,7 @@ import {
   REQUEST_SUCCESS,
   REQUEST_ERROR,
   SELECT_TIMELOG,
+  CREATE_TIMELOG,
 } from './types';
 
 export const changeTab = newTab => ({
@@ -72,3 +73,11 @@ export const selectTimeLog = selected => ({
   type: SELECT_TIMELOG,
   payload: selected,
 });
+
+export const createTimelog = (timelog) => {
+  console.log('action', timelog);
+  return {
+    type: CREATE_TIMELOG,
+    payload: timelog,
+  };
+};

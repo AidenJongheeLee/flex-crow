@@ -242,7 +242,7 @@ const TableContainer = styled.div`
 
 const MainContainer = styled.div`
   padding: 30px 80px;
-  height: auto;
+  height: 100%;
   background-color: ${props => props.theme.backgroundColor};
 `;
 

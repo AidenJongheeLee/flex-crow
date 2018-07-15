@@ -1,4 +1,4 @@
-import { SELECT_TIMELOG } from '../actions/types';
+import { SELECT_TIMELOG, CREATE_TIMELOG } from '../actions/types';
 
 const initialState = {
   timeLogs: [
@@ -22,6 +22,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SELECT_TIMELOG:
       return { ...state, selected: action.payload };
+
+    case CREATE_TIMELOG:
+      console.log('reducer', action);
+
+      return { ...state, timeLogs: state.timeLogs.concat(action.payload) };
 
     default:
       return state;
