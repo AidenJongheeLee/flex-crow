@@ -1,4 +1,5 @@
-const baseUrl = 'http://5d5eab99.ngrok.io';
+const baseUrl = 'https://a5c9c29c.ngrok.io';
+
 
 const fetchInvoices = async () => {
   try {
@@ -7,7 +8,7 @@ const fetchInvoices = async () => {
     return await Promise.resolve(data);
   } catch (error) {
     console.log('Error while fetching invoices');
-    return error;
+    return [];
   }
 };
 
