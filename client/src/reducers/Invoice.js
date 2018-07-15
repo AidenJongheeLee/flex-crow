@@ -10,6 +10,7 @@ const initialState = {
   serviceDetail: '',
   price: '',
   id: 0,
+  status: 'unpaid',
 };
 
 export default (state = initialState, action) => {

@@ -8,6 +8,7 @@ const initialState = {
       billingFrequency: 'one-time',
       serviceDetail: 'Flex Ride Flex Ride Flex Ride',
       price: 100,
+      status: 'paid',
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ const initialState = {
       billingFrequency: 'one-time',
       serviceDetail: 'Flex Crow Flex Crow Flex Crow',
       price: 100,
+      status: 'unpaid',
     },
     {
       id: 3,
@@ -26,6 +28,7 @@ const initialState = {
       billingFrequency: 'one-time',
       serviceDetail: 'Flex Chain Flex Chain Flex Chain',
       price: 100,
+      status: 'cancel',
     },
   ],
 };
