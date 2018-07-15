@@ -4,16 +4,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, Button, InputAdornment } from '@material-ui/core';
+import { submitInvoice } from '../actions';
 
 class InvoiceSummary extends Component {
   static propTypes = {
     invoice: object.isRequired,
     classes: object.isRequired,
     handleBack: func.isRequired,
+    submitInvoice: func.isRequired,
   };
 
   handleClick = () => {
-    console.log('hai');
+    this.props.submitInvoice(this.props.invoice);
   }
 
   render() {
@@ -130,6 +132,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    {},
+    { submitInvoice },
   )(InvoiceSummary),
 );
